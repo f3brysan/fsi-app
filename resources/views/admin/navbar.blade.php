@@ -39,7 +39,7 @@
                         <div class="navbar-brand-box">
                             <a href="index.html" class="logo logo-dark">
                                 <span class="logo-sm">
-                                    <img src="assets/images/logo-sm.png" alt="logo-sm" height="22">
+                                    <img src="assets/images/fsi-logo-dark.png" alt="logo-sm" height="22">
                                 </span>
                                 <span class="logo-lg">
                                     <img src="assets/images/fsi-logo-dark.png" alt="logo-dark" height="20">
@@ -48,7 +48,7 @@
 
                             <a href="index.html" class="logo logo-light">
                                 <span class="logo-sm">
-                                    <img src="assets/images/logo-sm.png" alt="logo-sm-light" height="22">
+                                    <img src="assets/images/fsi-logo-dark.png" alt="logo-sm-light" height="22">
                                 </span>
                                 <span class="logo-lg">
                                     <img src="assets/images/fsi-logo-dark.png" alt="logo-light" height="20">
@@ -183,21 +183,21 @@
                             <li class="menu-title">Menu</li>
 
                             <li>
-                                <a href="index.html" class="waves-effect">
+                                <a href="admin" class="waves-effect">
                                     <i class="ri-dashboard-line"></i>
                                     <span>Beranda</span>
                                 </a>
                             </li>
 
                             <li>
-                                <a href="calendar.html" class=" waves-effect">
+                                <a href="agenda" class=" waves-effect">
                                     <i class="ri-calendar-2-line"></i>
                                     <span>Agenda</span>
                                 </a>
                             </li>
 
                             <li>
-                                <a href="calendar.html" class=" waves-effect">
+                                <a href="poinku" class=" waves-effect">
                                     <i class="ri-copper-coin-line"></i>
                                     <span>Pointku</span>
                                 </a>

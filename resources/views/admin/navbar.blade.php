@@ -18,7 +18,10 @@
         <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
         <!-- App Css-->
         <link href="assets/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
-
+        {{-- Owl Carousel --}}
+        <link href="assets/libs/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet" type="text/css" />
+        <link href="assets/libs/owl.carousel/assets/owl.theme.default.min.css" rel="stylesheet" type="text/css" />
+               
     </head>
 
     <body data-topbar="dark">
@@ -36,7 +39,7 @@
                         <div class="navbar-brand-box">
                             <a href="index.html" class="logo logo-dark">
                                 <span class="logo-sm">
-                                    <img src="assets/images/logo-sm.png" alt="logo-sm" height="22">
+                                    <img src="assets/images/fsi-logo-dark.png" alt="logo-sm" height="22">
                                 </span>
                                 <span class="logo-lg">
                                     <img src="assets/images/fsi-logo-dark.png" alt="logo-dark" height="20">
@@ -45,7 +48,7 @@
 
                             <a href="index.html" class="logo logo-light">
                                 <span class="logo-sm">
-                                    <img src="assets/images/logo-sm.png" alt="logo-sm-light" height="22">
+                                    <img src="assets/images/fsi-logo-dark.png" alt="logo-sm-light" height="22">
                                 </span>
                                 <span class="logo-lg">
                                     <img src="assets/images/fsi-logo-dark.png" alt="logo-light" height="20">
@@ -154,13 +157,13 @@
                                 data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <img class="rounded-circle header-profile-user" src="assets/images/users/avatar-1.jpg"
                                     alt="Header Avatar">
-                                <span class="d-none d-xl-inline-block ms-1">Julia</span>
+                                <span class="d-none d-xl-inline-block ms-1">Heri Mulyanto</span>
                                 <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
                             </button>
                             <div class="dropdown-menu dropdown-menu-end">
                                 <!-- item-->
                                 <a class="dropdown-item" href="#"><i class="ri-user-line align-middle me-1"></i> Profile</a>                                
-                                <a class="dropdown-item d-block" href="#"><span class="badge bg-success float-end mt-1">11</span><i class="ri-settings-2-line align-middle me-1"></i> Settings</a>
+                                <a class="dropdown-item d-block" href="#"><i class="ri-settings-2-line align-middle me-1"></i> Settings</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item text-danger" href="#"><i class="ri-shut-down-line align-middle me-1 text-danger"></i> Logout</a>
                             </div>
@@ -180,22 +183,22 @@
                             <li class="menu-title">Menu</li>
 
                             <li>
-                                <a href="index.html" class="waves-effect">
-                                    <i class="ri-dashboard-line"></i><span class="badge rounded-pill bg-success float-end">3</span>
+                                <a href="admin" class="waves-effect">
+                                    <i class="ri-dashboard-line"></i>
                                     <span>Beranda</span>
                                 </a>
                             </li>
 
                             <li>
-                                <a href="calendar.html" class=" waves-effect">
+                                <a href="agenda" class=" waves-effect">
                                     <i class="ri-calendar-2-line"></i>
                                     <span>Agenda</span>
                                 </a>
                             </li>
 
                             <li>
-                                <a href="calendar.html" class=" waves-effect">
-                                    <i class=" ri-copper-coin-line"></i>
+                                <a href="poinku" class=" waves-effect">
+                                    <i class="ri-copper-coin-line"></i>
                                     <span>Pointku</span>
                                 </a>
                             </li>
@@ -214,7 +217,7 @@
                             <li class="menu-title">Dokumemn Penting</li>
 
                             <li>
-                                <a href="javascript: void(0);" class="has-arrow waves-effect">
+                                <a href="javascript: void(0);">
                                     <i class="ri-file-line"></i>
                                     <span>AD/ART</span>
                                 </a>                                
@@ -232,6 +235,28 @@
                             </li>
 
                             <li class="menu-title">Fitur Lain</li>
+
+                            <li class="menu-title">Master Data</li>
+                            <li>
+                                <a href="javascript: void(0);" >
+                                    <i class="ri-database-2-line"></i>
+                                    <span>Data Regional</span>
+                                </a>                                
+                            </li>
+
+                            <li>
+                                <a href="javascript: void(0);" >
+                                    <i class="ri-database-line"></i>
+                                    <span>Data Komunitas</span>
+                                </a>                                
+                            </li>
+
+                            <li>
+                                <a href="javascript: void(0);" >
+                                    <i class="ri-team-line"></i>
+                                    <span>Data Anggota</span>
+                                </a>                                
+                            </li>
 
                         </ul>
                     </div>

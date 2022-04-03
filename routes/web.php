@@ -13,14 +13,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
-Route::get('/auth', function(){
+Route::get('/auth', function () {
     return view('auth');
 });
 
 Route::get('/admin', function () {
-    return view('admin/index');
+    return view('admin/dashboard');
+});
+
+Route::get('agenda', function () {
+    return view('admin/agenda');
+});
+
+Route::get('poinku', function () {
+    return view('admin/poin');
 });

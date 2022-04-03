@@ -23,5 +23,13 @@
 
 <script src="assets/js/app.js"></script>
 
+{{-- Owl Caraousel --}}
+<script src="assets/libs/owl.carousel/owl.carousel.min.js"></script>
+<script>
+    $(document).ready(function(){
+  $(".owl-carousel").owlCarousel();
+});
+</script>
+
 </body>
 </html>

@@ -133,6 +133,7 @@
                             </div>                            
                         </div>
 
+                        {{-- Widget Poin --}}
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="card">
@@ -152,6 +153,7 @@
                                     </div><!-- end cardbody -->
                                 </div><!-- end card -->
                             </div><!-- end col -->
+                            
                         </div>
                     </div>
                 </div> <!-- container-fluid -->

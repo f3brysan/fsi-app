@@ -18,7 +18,10 @@
         <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
         <!-- App Css-->
         <link href="assets/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
-
+        {{-- Owl Carousel --}}
+        <link href="assets/libs/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet" type="text/css" />
+        <link href="assets/libs/owl.carousel/assets/owl.theme.default.min.css" rel="stylesheet" type="text/css" />
+               
     </head>
 
     <body data-topbar="dark">

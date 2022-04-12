@@ -1,9 +1,7 @@
-
 <!doctype html>
 <html lang="en">
 
     <head>
-        
         <meta charset="utf-8" />
         <title>FSI-App | Federasi Supra Indonesia App </title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,8 +18,12 @@
         <link href="../assets/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
         {{-- Owl Carousel --}}
         <link href="../assets/libs/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet" type="text/css" />
-        <link href="../assets/libs/owl.carousel/assets/owl.theme.default.min.css" rel="stylesheet" type="text/css" />
-               
+        <link href="../assets/libs/owl.carousel/assets/owl.theme.default.min.css" rel="stylesheet" type="text/css" />    
+        <!-- DataTables -->
+        <link href="../assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+        <link href="../assets/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+        <link href="../assets/libs/datatables.net-select-bs4/css//select.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+           
     </head>
 
     <body data-topbar="dark">
@@ -183,21 +185,21 @@
                             <li class="menu-title">Menu</li>
 
                             <li>
-                                <a href="admin" class="waves-effect">
+                                <a href="/beranda" class="waves-effect">
                                     <i class="ri-dashboard-line"></i>
                                     <span>Beranda</span>
                                 </a>
                             </li>
 
                             <li>
-                                <a href="agenda" class=" waves-effect">
+                                <a href="/agenda" class=" waves-effect">
                                     <i class="ri-calendar-2-line"></i>
                                     <span>Agenda</span>
                                 </a>
                             </li>
 
                             <li>
-                                <a href="poinku" class=" waves-effect">
+                                <a href="/poinku" class=" waves-effect">
                                     <i class="ri-copper-coin-line"></i>
                                     <span>Pointku</span>
                                 </a>
@@ -217,7 +219,7 @@
                             <li class="menu-title">Dokumemn Penting</li>
 
                             <li>
-                                <a href="javascript: void(0);">
+                                <a href="/adart">
                                     <i class="ri-file-line"></i>
                                     <span>AD/ART</span>
                                 </a>                                

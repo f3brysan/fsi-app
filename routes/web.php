@@ -18,14 +18,18 @@ Route::get('/auth', function () {
     return view('auth');
 });
 
-Route::get('/admin', function () {
+Route::get('/beranda', function () {
     return view('admin/dashboard');
 });
 
-Route::get('agenda', function () {
+Route::get('/agenda', function () {
     return view('admin/agenda');
 });
 
-Route::get('poinku', function () {
+Route::get('/poinku', function () {
     return view('admin/poin');
+});
+
+Route::get('/adart', function () {
+    return view('admin/adart');
 });

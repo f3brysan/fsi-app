@@ -5,7 +5,7 @@
     <head>
         
         <meta charset="utf-8" />
-        <title>Login | Federasi Supra Indonesia APP </title>
+        <title>Registrasi | Federasi Supra Indonesia APP </title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
         <meta content="Themesdesign" name="author" />
@@ -37,47 +37,36 @@
                             </div>
                         </div>
     
-                        <h4 class="text-muted text-center font-size-18"><b>Sign In</b></h4>
+                        <h4 class="text-muted text-center font-size-18"><b>Registrasi Baru</b></h4>
     
                         <div class="p-3">
-                            <form class="form-horizontal mt-3" action="index.html">
+                            <form class="form-horizontal mt-3" action="index.html">                               
     
                                 <div class="form-group mb-3 row">
                                     <div class="col-12">
-                                        <input class="form-control" type="text" required="" placeholder="Username">
+                                        <input class="form-control" type="email" required="" placeholder="Email">
                                     </div>
-                                </div>
+                                </div>                                    
     
                                 <div class="form-group mb-3 row">
                                     <div class="col-12">
                                         <input class="form-control" type="password" required="" placeholder="Password">
                                     </div>
-                                </div>
+                                </div>                                   
     
-                                <div class="form-group mb-3 row">
+                                <div class="form-group text-center row mt-3 pt-1">
                                     <div class="col-12">
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="customCheck1">
-                                            <label class="form-label ms-1" for="customCheck1">Remember me</label>
-                                        </div>
+                                        <button class="btn btn-info w-100 waves-effect waves-light" type="submit">Register</button>
                                     </div>
                                 </div>
     
-                                <div class="form-group mb-3 text-center row mt-3 pt-1">
-                                    <div class="col-12">
-                                        <button class="btn btn-info w-100 waves-effect waves-light" type="submit">Log In</button>
-                                    </div>
-                                </div>
-    
-                                <div class="form-group mb-0 row mt-2">
-                                    <div class="col-sm-7 mt-3">
-                                        <a href="auth-recoverpw.html" class="text-muted"><i class="mdi mdi-lock"></i> Lupa Password?</a>
-                                    </div>
-                                    <div class="col-sm-5 mt-3">
-                                        <a href="/register" class="text-muted"><i class="mdi mdi-account-circle"></i> Buat Akun Baru</a>
+                                <div class="form-group mt-2 mb-0 row">
+                                    <div class="col-12 mt-3 text-center">
+                                        <a href="/auth" class="text-muted">Sudah memiliki akun?</a>
                                     </div>
                                 </div>
                             </form>
+                            <!-- end form -->
                         </div>
                         <!-- end -->
                     </div>

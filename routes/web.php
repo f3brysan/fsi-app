@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\RegisterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,9 +16,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::get('/auth', function () {
-    return view('auth');
-});
+Route::get('/auth', [LoginController::class, 'index']);
+
+Route::get('/register', [RegisterController::class, 'index']);
 
 Route::get('/beranda', function () {
     return view('admin/dashboard');

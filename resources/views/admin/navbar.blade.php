@@ -240,23 +240,30 @@
 
                             <li class="menu-title">Master Data</li>
                             <li>
-                                <a href="javascript: void(0);" >
+                                <a href="/master/regional" >
                                     <i class="ri-database-2-line"></i>
                                     <span>Data Regional</span>
                                 </a>                                
                             </li>
 
                             <li>
-                                <a href="javascript: void(0);" >
+                                <a href="/master/komunitas" >
                                     <i class="ri-database-line"></i>
                                     <span>Data Komunitas</span>
                                 </a>                                
                             </li>
 
                             <li>
-                                <a href="javascript: void(0);" >
+                                <a href="/master/anggota" >
                                     <i class="ri-team-line"></i>
                                     <span>Data Anggota</span>
+                                </a>                                
+                            </li>
+
+                            <li>
+                                <a href="/master/event" >
+                                    <i class="ri-map-pin-4-fill"></i>
+                                    <span>Data Event</span>
                                 </a>                                
                             </li>
 

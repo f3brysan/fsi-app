@@ -37,26 +37,39 @@
                             </div>
                         </div>
     
-                        <h4 class="text-muted text-center font-size-18"><b>Registrasi Baru</b></h4>
-    
+                        <h4 class="text-muted text-center font-size-18"><b>Registrasi Baru</b></h4>                                               
+                        
                         <div class="p-3">
-                            <form class="form-horizontal mt-3" action="index.html">                               
-    
+                            @error('password')
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            {{ $message }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>  
+                        @enderror
+
+                        @error('email')
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            {{ $message }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>  
+                        @enderror
+                            <form class="form-horizontal mt-3" action="/register" method="POST">                               
+                                @csrf
                                 <div class="form-group mb-3 row">
                                     <div class="col-12">
-                                        <input class="form-control" type="email" required="" placeholder="Email">
+                                        <input class="form-control" type="email" name="email" id="email" required="" placeholder="Email">
                                     </div>
                                 </div>                                    
     
                                 <div class="form-group mb-3 row">
                                     <div class="col-12">
-                                        <input class="form-control" type="password" required="" placeholder="Password">
+                                        <input class="form-control" type="password" name="password" id="password" required="" placeholder="Password">
                                     </div>
                                 </div>                                   
     
                                 <div class="form-group text-center row mt-3 pt-1">
                                     <div class="col-12">
-                                        <button class="btn btn-info w-100 waves-effect waves-light" type="submit">Register</button>
+                                        <button class="btn btn-info w-100 waves-effect waves-light" type="submit">Daftar</button>
                                     </div>
                                 </div>
     
@@ -86,6 +99,18 @@
         <script src="../assets/libs/node-waves/waves.min.js"></script>
 
         <script src="../assets/js/app.js"></script>
+
+        <script type="text/javascript">
+            $('#reload').click(function () {
+                $.ajax({
+                    type: 'GET',
+                    url: 'reload-captcha',
+                    success: function (data) {
+                        $(".captcha span").html(data.captcha);
+                    }
+                });
+            });
+        </script>
 
     </body>
 </html>

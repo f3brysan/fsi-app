@@ -15,10 +15,11 @@ use App\Http\Controllers\RegisterController;
 |
 */
 
-
 Route::get('/auth', [LoginController::class, 'index']);
 
 Route::get('/register', [RegisterController::class, 'index']);
+Route::get('/reload-captcha', [App\Http\Controllers\Auth\RegisterController::class, 'reloadCaptcha']);
+Route::post('/register', [RegisterController::class, 'store']);
 
 Route::get('/beranda', function () {
     return view('admin/dashboard');

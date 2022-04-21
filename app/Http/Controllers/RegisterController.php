@@ -33,6 +33,7 @@ class RegisterController extends Controller
         $request->validate([
             'email' => 'required|email:dns|unique:users',
             'password' => 'required|min:8',
+            'captcha' => 'required|captcha'
             
         ]);
 
@@ -47,12 +48,12 @@ class RegisterController extends Controller
         return redirect('/auth')->with('success', 'Registrasi Anda berhasil !');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Register  $register
-     * @return \Illuminate\Http\Response
-     */
+    // Load Captcha
+    public function reloadCaptcha()
+    {
+        return response()->json(['captcha'=> captcha_img()]);
+    }
+
     public function show(Register $register)
     {
         //

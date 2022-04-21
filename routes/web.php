@@ -18,7 +18,7 @@ use App\Http\Controllers\RegisterController;
 Route::get('/auth', [LoginController::class, 'index']);
 
 Route::get('/register', [RegisterController::class, 'index']);
-Route::get('/reload-captcha', [App\Http\Controllers\Auth\RegisterController::class, 'reloadCaptcha']);
+Route::get('/reload-captcha', [RegisterController::class, 'reloadCaptcha']);
 Route::post('/register', [RegisterController::class, 'store']);
 
 Route::get('/beranda', function () {

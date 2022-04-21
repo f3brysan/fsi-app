@@ -40,32 +40,50 @@
                         <h4 class="text-muted text-center font-size-18"><b>Registrasi Baru</b></h4>                                               
                         
                         <div class="p-3">
-                            @error('password')
-                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                            {{ $message }}
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>  
-                        @enderror
-
-                        @error('email')
-                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                            {{ $message }}
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>  
-                        @enderror
+                           
                             <form class="form-horizontal mt-3" action="/register" method="POST">                               
                                 @csrf
                                 <div class="form-group mb-3 row">
                                     <div class="col-12">
-                                        <input class="form-control" type="email" name="email" id="email" required="" placeholder="Email">
-                                    </div>
+                                        <input class="form-control @error('email') is-invalid @enderror" type="email" name="email" id="email" required="" placeholder="Email">
+                                        @error('email')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                          </div>
+                                        @enderror
+                                    </div>                                   
                                 </div>                                    
     
                                 <div class="form-group mb-3 row">
                                     <div class="col-12">
-                                        <input class="form-control" type="password" name="password" id="password" required="" placeholder="Password">
+                                        <input class="form-control @error('password') is-invalid @enderror" type="password" name="password" id="password" required="" placeholder="Password">
+                                        @error('password')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                          </div>
+                                        @enderror
+                                    </div>                                   
+                                </div> 
+                                
+                                <div class="form-group mb-3 row">                               
+                                    <div class="col-md-6 captcha">
+                                        <span>{!! captcha_img() !!}</span>
+                                        <button type="button" class="btn btn-danger" class="reload" id="reload">
+                                        &#x21bb;
+                                        </button>
                                     </div>
-                                </div>                                   
+                                </div>
+
+                                <div class="form-group mb-3 row">
+                                    <div class="col-12">
+                                        <input class="form-control @error('captcha') is-invalid @enderror" type="text" name="captcha" id="captcha" required="" placeholder="Ketikan Captcha">
+                                        @error('captcha')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                      </div>
+                                    @enderror
+                                    </div>                                    
+                                </div> 
     
                                 <div class="form-group text-center row mt-3 pt-1">
                                     <div class="col-12">

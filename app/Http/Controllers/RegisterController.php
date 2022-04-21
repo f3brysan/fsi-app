@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use Ramsey\Uuid\Uuid;
 use App\Models\Register;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class RegisterController extends Controller
 {
@@ -33,7 +36,15 @@ class RegisterController extends Controller
             
         ]);
 
-        dd('berhasil');
+        $uuid4 = Uuid::uuid4();
+
+        $register = new User;
+        $register->uuid = $uuid4;
+        $register->email = $request->email;
+        $register->password = Hash::make($request->password);
+        $register->save();
+
+        return redirect('/auth')->with('success', 'Registrasi Anda berhasil !');
     }
 
     /**

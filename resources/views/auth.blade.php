@@ -40,6 +40,12 @@
                         <h4 class="text-muted text-center font-size-18"><b>Sign In</b></h4>
     
                         <div class="p-3">
+                            @if (session()->has('success'))
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                {{ session('success') }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>  
+                            @endif
                             <form class="form-horizontal mt-3" action="index.html">
     
                                 <div class="form-group mb-3 row">

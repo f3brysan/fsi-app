@@ -1,27 +1,29 @@
-
 <!doctype html>
 <html lang="en">
 
     <head>
-        
         <meta charset="utf-8" />
         <title>FSI-App | Federasi Supra Indonesia App </title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
         <meta content="Themesdesign" name="author" />
         <!-- App favicon -->
-        <link rel="shortcut icon" href="assets/images/favicon.ico">
+        <link rel="shortcut icon" href="../assets/images/favicon.ico">
 
         <!-- Bootstrap Css -->
-        <link href="assets/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
+        <link href="../assets/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
         <!-- Icons Css -->
-        <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+        <link href="../assets/css/icons.min.css" rel="stylesheet" type="text/css" />
         <!-- App Css-->
-        <link href="assets/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
+        <link href="../assets/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
         {{-- Owl Carousel --}}
-        <link href="assets/libs/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet" type="text/css" />
-        <link href="assets/libs/owl.carousel/assets/owl.theme.default.min.css" rel="stylesheet" type="text/css" />
-               
+        <link href="../assets/libs/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet" type="text/css" />
+        <link href="../assets/libs/owl.carousel/assets/owl.theme.default.min.css" rel="stylesheet" type="text/css" />    
+        <!-- DataTables -->
+        <link href="../assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+        <link href="../assets/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+        <link href="../assets/libs/datatables.net-select-bs4/css//select.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+           
     </head>
 
     <body data-topbar="dark">
@@ -39,19 +41,19 @@
                         <div class="navbar-brand-box">
                             <a href="index.html" class="logo logo-dark">
                                 <span class="logo-sm">
-                                    <img src="assets/images/fsi-logo-dark.png" alt="logo-sm" height="22">
+                                    <img src="../assets/images/fsi-logo-dark.png" alt="logo-sm" height="22">
                                 </span>
                                 <span class="logo-lg">
-                                    <img src="assets/images/fsi-logo-dark.png" alt="logo-dark" height="20">
+                                    <img src="../assets/images/fsi-logo-dark.png" alt="logo-dark" height="20">
                                 </span>
                             </a>
 
                             <a href="index.html" class="logo logo-light">
                                 <span class="logo-sm">
-                                    <img src="assets/images/fsi-logo-dark.png" alt="logo-sm-light" height="22">
+                                    <img src="../assets/images/fsi-logo-dark.png" alt="logo-sm-light" height="22">
                                 </span>
                                 <span class="logo-lg">
-                                    <img src="assets/images/fsi-logo-dark.png" alt="logo-light" height="20">
+                                    <img src="../assets/images/fsi-logo-dark.png" alt="logo-light" height="20">
                                 </span>
                             </a>
                         </div>
@@ -100,7 +102,7 @@
                                     </a>
                                     <a href="" class="text-reset notification-item">
                                         <div class="d-flex">
-                                            <img src="assets/images/users/avatar-3.jpg"
+                                            <img src="../assets/images/users/avatar-3.jpg"
                                                 class="me-3 rounded-circle avatar-xs" alt="user-pic">
                                             <div class="flex-1">
                                                 <h6 class="mb-1">James Lemire</h6>
@@ -130,7 +132,7 @@
 
                                     <a href="" class="text-reset notification-item">
                                         <div class="d-flex">
-                                            <img src="assets/images/users/avatar-4.jpg"
+                                            <img src="../assets/images/users/avatar-4.jpg"
                                                 class="me-3 rounded-circle avatar-xs" alt="user-pic">
                                             <div class="flex-1">
                                                 <h6 class="mb-1">Salena Layfield</h6>
@@ -155,7 +157,7 @@
                         <div class="dropdown d-inline-block user-dropdown">
                             <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown"
                                 data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <img class="rounded-circle header-profile-user" src="assets/images/users/avatar-1.jpg"
+                                <img class="rounded-circle header-profile-user" src="../assets/images/users/avatar-1.jpg"
                                     alt="Header Avatar">
                                 <span class="d-none d-xl-inline-block ms-1">Heri Mulyanto</span>
                                 <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
@@ -165,7 +167,10 @@
                                 <a class="dropdown-item" href="#"><i class="ri-user-line align-middle me-1"></i> Profile</a>                                
                                 <a class="dropdown-item d-block" href="#"><i class="ri-settings-2-line align-middle me-1"></i> Settings</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item text-danger" href="#"><i class="ri-shut-down-line align-middle me-1 text-danger"></i> Logout</a>
+                                <form action="/logout" method="POST">
+                                    @csrf
+                                    <button class="dropdown-item text-danger" type="submit"><i class="ri-shut-down-line align-middle me-1 text-danger"></i> Logout</button>                                    
+                                </form>                                
                             </div>
                         </div>
                       </div>
@@ -183,21 +188,21 @@
                             <li class="menu-title">Menu</li>
 
                             <li>
-                                <a href="admin" class="waves-effect">
+                                <a href="/beranda" class="waves-effect">
                                     <i class="ri-dashboard-line"></i>
                                     <span>Beranda</span>
                                 </a>
                             </li>
 
                             <li>
-                                <a href="agenda" class=" waves-effect">
+                                <a href="/agenda" class=" waves-effect">
                                     <i class="ri-calendar-2-line"></i>
                                     <span>Agenda</span>
                                 </a>
                             </li>
 
                             <li>
-                                <a href="poinku" class=" waves-effect">
+                                <a href="/poinku" class=" waves-effect">
                                     <i class="ri-copper-coin-line"></i>
                                     <span>Pointku</span>
                                 </a>
@@ -217,7 +222,7 @@
                             <li class="menu-title">Dokumemn Penting</li>
 
                             <li>
-                                <a href="javascript: void(0);">
+                                <a href="/adart">
                                     <i class="ri-file-line"></i>
                                     <span>AD/ART</span>
                                 </a>                                
@@ -238,23 +243,30 @@
 
                             <li class="menu-title">Master Data</li>
                             <li>
-                                <a href="javascript: void(0);" >
+                                <a href="/master/regional" >
                                     <i class="ri-database-2-line"></i>
                                     <span>Data Regional</span>
                                 </a>                                
                             </li>
 
                             <li>
-                                <a href="javascript: void(0);" >
+                                <a href="/master/komunitas" >
                                     <i class="ri-database-line"></i>
                                     <span>Data Komunitas</span>
                                 </a>                                
                             </li>
 
                             <li>
-                                <a href="javascript: void(0);" >
+                                <a href="/master/anggota" >
                                     <i class="ri-team-line"></i>
                                     <span>Data Anggota</span>
+                                </a>                                
+                            </li>
+
+                            <li>
+                                <a href="/master/event" >
+                                    <i class="ri-map-pin-4-fill"></i>
+                                    <span>Data Event</span>
                                 </a>                                
                             </li>
 

@@ -68,7 +68,7 @@
                                 <div class="form-group mb-3 row">                               
                                     <div class="col-md-6 captcha">
                                         <span>{!! captcha_img() !!}</span>
-                                        <button type="button" class="btn btn-danger" class="reload" id="reload">
+                                        <button type="button" class="btn btn-light" class="reload" id="reload">
                                         &#x21bb;
                                         </button>
                                     </div>

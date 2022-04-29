@@ -46,19 +46,57 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                             </div>  
                             @endif
-                            <form class="form-horizontal mt-3" action="index.html">
-    
+
+                            @if (session()->has('LoginError'))
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                {{ session('LoginError') }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>  
+                            @endif
+
+                            <form class="form-horizontal mt-3" action="/login" method="POST">
+                                @csrf
                                 <div class="form-group mb-3 row">
                                     <div class="col-12">
-                                        <input class="form-control" type="text" required="" placeholder="Username">
+                                        <input class="form-control @error('email') is-invalid @enderror" type="email" name="email" id="email" required="" placeholder="Email" autofocus>
+                                        @error('email')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                      </div>
+                                    @enderror
                                     </div>
                                 </div>
     
                                 <div class="form-group mb-3 row">
                                     <div class="col-12">
-                                        <input class="form-control" type="password" required="" placeholder="Password">
+                                        <input class="form-control @error('password') is-invalid @enderror" type="password" name="password" id="password" required="" placeholder="Password">
+                                        @error('password')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                      </div>
+                                    @enderror
                                     </div>
                                 </div>
+
+                                <div class="form-group mb-3 row">                               
+                                    <div class="col-md-6 captcha">
+                                        <span>{!! captcha_img() !!}</span>
+                                        <button type="button" class="btn btn-light" class="reload" id="reload">
+                                        &#x21bb;
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="form-group mb-3 row">
+                                    <div class="col-12">
+                                        <input class="form-control @error('captcha') is-invalid @enderror" type="text" name="captcha" id="captcha" required="" placeholder="Ketikan Captcha">
+                                        @error('captcha')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                      </div>
+                                    @enderror
+                                    </div>                                    
+                                </div> 
     
                                 <div class="form-group mb-3 row">
                                     <div class="col-12">
@@ -103,6 +141,18 @@
         <script src="../assets/libs/node-waves/waves.min.js"></script>
 
         <script src="../assets/js/app.js"></script>
+
+        <script type="text/javascript">
+            $('#reload').click(function () {
+                $.ajax({
+                    type: 'GET',
+                    url: 'reload-captcha',
+                    success: function (data) {
+                        $(".captcha span").html(data.captcha);
+                    }
+                });
+            });
+        </script>
 
     </body>
 </html>

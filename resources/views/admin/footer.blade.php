@@ -48,6 +48,18 @@
 } );
 </script>
 
+<script>
+    $(document).ready(function() {
+    var table = $('#regionalsTable').DataTable( {
+        rowReorder: {
+            selector: 'td:nth-child(2)'
+        },
+        responsive: true
+    } );
+} );
+</script>
+
+
 
 </body>
 </html>

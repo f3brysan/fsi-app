@@ -50,7 +50,7 @@
 
 <script>
     $(document).ready(function() {
-    var table = $('#example').DataTable( {
+    var table = $('#regionalsTable').DataTable( {
         rowReorder: {
             selector: 'td:nth-child(2)'
         },

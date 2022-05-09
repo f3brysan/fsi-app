@@ -243,7 +243,7 @@
 
                             <li class="menu-title">Master Data</li>
                             <li>
-                                <a href="/master/regional" >
+                                <a href="/regional" >
                                     <i class="ri-database-2-line"></i>
                                     <span>Data Regional</span>
                                 </a>                                

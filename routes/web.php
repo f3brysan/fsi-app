@@ -3,6 +3,7 @@
 use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\RegionalController;
 use App\Http\Controllers\RegisterController;
 use GuzzleHttp\Middleware;
 
@@ -17,16 +18,21 @@ use GuzzleHttp\Middleware;
 |
 */
 
+// routing captcha
 Route::get('/reload-captcha', [RegisterController::class, 'reloadCaptcha']);
 
-Route::get('/login', [LoginController::class, 'index'])->name('login');
+// routing login + logout 
+Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
 Route::post('/login', [LoginController::class, 'auth']);
 Route::post('/logout', [LoginController::class, 'logout']);
 
+// routing registrasi
 Route::get('/register', [RegisterController::class, 'index']);
 Route::post('/register', [RegisterController::class, 'store']);
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->Middleware('auth');
+
+Route::get('/regional', [RegionalController::class, 'index'])->Middleware('auth');
 
 Route::get('/agenda', function () {
     return view('admin/agenda');

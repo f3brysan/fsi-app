@@ -45,7 +45,7 @@ class RegisterController extends Controller
         $register->password = Hash::make($request->password);
         $register->save();
 
-        return redirect('/auth')->with('success', 'Registrasi Anda berhasil !');
+        return redirect('/login')->with('success', 'Registrasi Anda berhasil !');
     }
 
     // Load Captcha

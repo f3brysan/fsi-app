@@ -17,6 +17,7 @@ class CreateRegionalsTable extends Migration
             $table->id();
             $table->string('uuid',36);
             $table->string('nama',50);
+            $table->string('slug',50);
             $table->dateTime('verified_at')->nullable();
             $table->boolean('status')->default(true);
             $table->timestamps();

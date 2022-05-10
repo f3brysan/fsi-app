@@ -32,7 +32,8 @@ Route::post('/register', [RegisterController::class, 'store']);
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->Middleware('auth');
 
-Route::get('/regional', [RegionalController::class, 'index'])->Middleware('auth');
+Route::resource('regional',RegionalController::class);
+// Route::get('/regional', [RegionalController::class, 'index'])->Middleware('auth');
 
 Route::get('/agenda', function () {
     return view('admin/agenda');

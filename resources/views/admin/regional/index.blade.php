@@ -29,11 +29,22 @@
                                 <h4>Data Regional</h4>
                                 <div class="card">
                                     <div class="card-body">
-        
-                                        <h4 class="card-title">Data Regional</h4>
+                                        <!-- Notifikasi menggunakan flash session data -->
+                                        @if (session('success'))
+                                        <div class="alert alert-success">
+                                            {{ session('success') }}
+                                        </div>
+                                        @endif
+
+                                        @if (session('error'))
+                                        <div class="alert alert-error">
+                                            {{ session('error') }}
+                                        </div>
+                                        @endif
+                                                <h4 class="card-title">Data Regional</h4>
                                         <p class="card-title-desc">Berikut adalah daftar regional di Federasi Supra Indonesia.
                                         </p>
-        
+                                        <a href="{{ route('regional.create') }}" class="btn btn-md btn-primary mb-3 float-right"><i class="ri-add-box-fill"></i> Tambah Baru</a>
                                         <table id="adartTable" class="table table-responsive">
                                             <thead>
                                             <tr>                                               
@@ -59,8 +70,13 @@
                                                 Lolos
                                                 @endif</td>
                                                 <td>
-                                                    <a href="" class="btn btn-sm btn-primary"><i class="ri-chat-check-fill"></i></a>
-                                                                                                
+                                                    <a href="/regional/{{ $regional->uuid}}/edit" class="btn btn-sm btn-primary">EDIT</a>
+                                                    <form onsubmit="return confirm('Apakah Anda Yakin ?');"
+                                            action="{{ route('regional.destroy', $regional->uuid) }}" method="POST" class="d-inline">                                            
+                                            @method('DELETE')
+                                            @csrf                                            
+                                            <button type="submit" class="btn btn-sm btn-danger">HAPUS</button>
+                                        </form>
                                                 </td>
                                             </tr>                                                                            
                                             @endforeach

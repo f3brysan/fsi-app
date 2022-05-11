@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Ramsey\Uuid\Uuid;
 use App\Models\Regional;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 
 class RegionalController extends Controller
@@ -15,9 +17,7 @@ class RegionalController extends Controller
     public function index()
     {
         $regionals = Regional::all();
-        return view('admin.regional', [
-            'regionals' => $regionals
-        ]);
+        return view('admin.regional.index', compact('regionals'));
     }
 
     /**
@@ -27,7 +27,7 @@ class RegionalController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.regional.create');
     }
 
     /**
@@ -38,7 +38,29 @@ class RegionalController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'nama' => 'required|string|max:50',                        
+        ]);
+
+        $uuid =  $uuid4 = Uuid::uuid4();
+        $regional = Regional::create([
+            'nama' => $request->nama,
+            'content' => $request->content,
+            'uuid' => $uuid,
+            'slug' => Str::slug($request->nama),
+        ]);
+        
+        if ($regional) {
+            return redirect()
+            ->route('regional.index')
+            ->with(['success' => 'Data Regional berhasil ditambahkan.']);
+        }
+        else {
+            return redirect()
+                ->back()
+                ->withInput()
+                ->with(['error' => 'Maaf ada kesalahan yang terjadi.']);
+        }
     }
 
     /**
@@ -47,9 +69,9 @@ class RegionalController extends Controller
      * @param  \App\Models\Regional  $regional
      * @return \Illuminate\Http\Response
      */
-    public function show(Regional $regional)
+    public function show(Regional $uuid)
     {
-        //
+        // 
     }
 
     /**
@@ -60,7 +82,9 @@ class RegionalController extends Controller
      */
     public function edit(Regional $regional)
     {
-        //
+        return Regional::where('slug', $regional);
+        // return view('admin.regional.create'
+        // );
     }
 
     /**
@@ -83,6 +107,12 @@ class RegionalController extends Controller
      */
     public function destroy(Regional $regional)
     {
-        //
+            Regional::destroy($regional->id);
+            return redirect()
+                ->route('regional.index')
+                ->with([
+                    'success' => 'Data Regional telah dihapus.'
+                ]);        
+        
     }
 }

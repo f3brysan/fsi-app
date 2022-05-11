@@ -33,8 +33,8 @@
 <script src="../assets/libs/owl.carousel/owl.carousel.min.js"></script>
 
 <!-- Responsive examples -->
-<script src="assets/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
-<script src="assets/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
+<script src="../assets/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+<script src="../assets/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
 
 <script>
     $(document).ready(function(){
@@ -57,6 +57,17 @@
         responsive: true
     } );
 } );
+</script>
+
+<script>
+    ClassicEditor
+            .create( document.querySelector( '#content' ) )
+            .then( editor => {
+                    console.log( editor );
+            } )
+            .catch( error => {
+                    console.error( error );
+            } );
 </script>
 
 

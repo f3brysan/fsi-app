@@ -22,7 +22,7 @@ use GuzzleHttp\Middleware;
 Route::get('/reload-captcha', [RegisterController::class, 'reloadCaptcha']);
 
 // routing login + logout 
-Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
+Route::get('/login', [LoginController::class, 'index']);
 Route::post('/login', [LoginController::class, 'auth']);
 Route::post('/logout', [LoginController::class, 'logout']);
 
@@ -30,7 +30,7 @@ Route::post('/logout', [LoginController::class, 'logout']);
 Route::get('/register', [RegisterController::class, 'index']);
 Route::post('/register', [RegisterController::class, 'store']);
 
-Route::get('/dashboard', [DashboardController::class, 'index'])->Middleware('auth');
+Route::get('/home', [DashboardController::class, 'index']);
 
 Route::resource('regional',RegionalController::class);
 // Route::get('/regional', [RegionalController::class, 'index'])->Middleware('auth');

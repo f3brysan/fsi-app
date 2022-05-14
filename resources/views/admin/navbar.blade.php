@@ -11,18 +11,18 @@
         <link rel="shortcut icon" href="../assets/images/favicon.ico">
 
         <!-- Bootstrap Css -->
-        <link href="../assets/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
+        <link href="/../assets/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
         <!-- Icons Css -->
-        <link href="../assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+        <link href="/../assets/css/icons.min.css" rel="stylesheet" type="text/css" />
         <!-- App Css-->
-        <link href="../assets/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
+        <link href="/../assets/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
         {{-- Owl Carousel --}}
-        <link href="../assets/libs/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet" type="text/css" />
-        <link href="../assets/libs/owl.carousel/assets/owl.theme.default.min.css" rel="stylesheet" type="text/css" />    
+        <link href="/../assets/libs/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet" type="text/css" />
+        <link href="/../assets/libs/owl.carousel/assets/owl.theme.default.min.css" rel="stylesheet" type="text/css" />    
         <!-- DataTables -->
-        <link href="../assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
-        <link href="../assets/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css" />
-        <link href="../assets/libs/datatables.net-select-bs4/css//select.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+        <link href="/../assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+        <link href="/../assets/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+        <link href="/../assets/libs/datatables.net-select-bs4/css//select.bootstrap4.min.css" rel="stylesheet" type="text/css" />
         {{-- CK EDITOR --}}
         <script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/ckeditor.js"></script>
            
@@ -252,7 +252,7 @@
                             </li>
 
                             <li>
-                                <a href="/master/komunitas" >
+                                <a href="{{ route('komunitas.index') }}" >
                                     <i class="ri-database-line"></i>
                                     <span>Data Komunitas</span>
                                 </a>                                

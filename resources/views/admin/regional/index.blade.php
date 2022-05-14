@@ -44,13 +44,12 @@
                                                 <h4 class="card-title">Data Regional</h4>
                                         <p class="card-title-desc">Berikut adalah daftar regional di Federasi Supra Indonesia.
                                         </p>
-                                        <a href="{{ route('regional.create') }}" class="btn btn-md btn-primary mb-3 float-right"><i class="ri-add-box-fill"></i> Tambah Baru</a>
-                                        <table id="adartTable" class="table table-responsive">
+                                        <a href="{{ route('regional.create') }}" class="btn btn-sm btn-primary mb-3 float-right"><i class="ri-add-box-fill"></i> Tambah Baru</a>
+                                        <table id="regionalsTable" class="table table-responsive">
                                             <thead>
                                             <tr>                                               
                                                 <th>No</th>
-                                                <th>Nama Regional</th> 
-                                                <th>Status</th>                                               
+                                                <th>Nama Regional</th>                                                                                     
                                                 <th>Aksi</th>
                                             </tr>
                                             </thead>
@@ -61,21 +60,15 @@
                                                 @foreach ($regionals as $regional)  
                                             <tr>
                                                 <td>{{ $no++ }}</td>                                                  
-                                                <td>{{ $regional['nama'] }}</td>                                                
-                                                <td>@if ($regional['verified_at']== NULL)
-                                                {{-- <span class="badge bg-danger">Belum Terverifikasi</span>                                                 --}}
-                                                Ditangguhkan
-                                                @else
-                                                {{-- <span class="badge bg-success">Sudah Terverifikasi</span>                                               --}}
-                                                Lolos
-                                                @endif</td>
+                                                <td>{{ $regional['nama'] }}</td>                                                                                                
                                                 <td>
-                                                    <a href="/regional/{{ $regional->uuid}}/edit" class="btn btn-sm btn-primary">EDIT</a>
+                                                    <a href="{{ route('regional.edit', $regional->uuid) }}" class="btn btn-sm btn-primary"><i class="ri-pencil-line
+                                                        "></i> Ubah</a>
                                                     <form onsubmit="return confirm('Apakah Anda Yakin ?');"
                                             action="{{ route('regional.destroy', $regional->uuid) }}" method="POST" class="d-inline">                                            
                                             @method('DELETE')
                                             @csrf                                            
-                                            <button type="submit" class="btn btn-sm btn-danger">HAPUS</button>
+                                            <button type="submit" class="btn btn-sm btn-danger"><i class="ri-delete-bin-2-line"></i> Hapus</button>
                                         </form>
                                                 </td>
                                             </tr>                                                                            

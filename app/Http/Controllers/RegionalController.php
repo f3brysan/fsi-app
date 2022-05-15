@@ -42,7 +42,7 @@ class RegionalController extends Controller
             'nama' => 'required|string|max:50',                        
         ]);
 
-        $uuid =  $uuid4 = Uuid::uuid4();
+        $uuid = Uuid::uuid4();
         $regional = Regional::create([
             'nama' => $request->nama,
             'content' => $request->content,
@@ -82,8 +82,9 @@ class RegionalController extends Controller
      */
     public function edit(Regional $regional)
     {
-        $get = Regional::findOrFail($regional->id);
-        return view('admin.regional.edit', compact('get'));
+        $get = Regional::where($regional->id);
+        return $get;
+        // return view('admin.regional.edit', compact('get'));
     }
 
     /**
@@ -103,7 +104,7 @@ class RegionalController extends Controller
         $regional->update([
             'nama' => $request->nama,
             'content' => $request->content,        
-            'slug' => Str::slug($request->title)
+            'slug' => Str::slug($request->nama)
         ]);
         
         if ($regional) {

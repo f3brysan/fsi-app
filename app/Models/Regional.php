@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Komunitas;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Regional extends Model
 {
@@ -21,4 +22,10 @@ class Regional extends Model
 {
     return 'uuid';
 }
+
+    public function komunitas()
+{
+    return $this->hasMany(Komunitas::class);
+}
+
 }

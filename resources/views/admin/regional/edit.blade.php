@@ -42,7 +42,7 @@
                                     </div>
                                     @endif
                                         <h4 class="card-title">Tambah Data Regional Baru</h4>                                        
-                                        <form action="{{ route('regional.store') }}" method="POST">
+                                        <form action="{{ route('regional.update', $get->uuid) }}" method="POST">
                                             @csrf
                                             @method('PUT')
 

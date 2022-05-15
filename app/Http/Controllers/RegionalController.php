@@ -15,8 +15,8 @@ class RegionalController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        $regionals = Regional::all();
+    {        
+        $regionals = Regional::orderBy('nama')->get();
         return view('admin.regional.index', compact('regionals'));
     }
 
@@ -42,7 +42,7 @@ class RegionalController extends Controller
             'nama' => 'required|string|max:50',                        
         ]);
 
-        $uuid =  $uuid4 = Uuid::uuid4();
+        $uuid = Uuid::uuid4();
         $regional = Regional::create([
             'nama' => $request->nama,
             'content' => $request->content,
@@ -82,9 +82,9 @@ class RegionalController extends Controller
      */
     public function edit(Regional $regional)
     {
-        return Regional::where('slug', $regional);
-        // return view('admin.regional.create'
-        // );
+        $get = Regional::where($regional->id);
+        return $get;
+        // return view('admin.regional.edit', compact('get'));
     }
 
     /**
@@ -96,7 +96,28 @@ class RegionalController extends Controller
      */
     public function update(Request $request, Regional $regional)
     {
-        //
+        $this->validate($request, [
+            'nama' => 'required|string|max:50',                        
+        ]);
+
+        $regional = Regional::FindorFail($regional->id);
+        $regional->update([
+            'nama' => $request->nama,
+            'content' => $request->content,        
+            'slug' => Str::slug($request->nama)
+        ]);
+        
+        if ($regional) {
+            return redirect()
+            ->route('regional.index')
+            ->with(['success' => 'Data Regional berhasil diubah.']);
+        }
+        else {
+            return redirect()
+                ->back()
+                ->withInput()
+                ->with(['error' => 'Maaf ada kesalahan yang terjadi.']);
+        }
     }
 
     /**
@@ -111,7 +132,7 @@ class RegionalController extends Controller
             return redirect()
                 ->route('regional.index')
                 ->with([
-                    'success' => 'Data Regional telah dihapus.'
+                    'success' => 'Data Regional berhasil dihapus.'
                 ]);        
         
     }

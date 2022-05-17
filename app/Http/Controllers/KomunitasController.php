@@ -18,7 +18,7 @@ class KomunitasController extends Controller
      */
     public function index()
     {
-        $komunitas = Komunitas::orderBy('nama')->get();
+        $komunitas = Komunitas::with('regional')->orderBy('nama')->get();
         return view('admin.komunitas.index', compact('komunitas'));
     }
 

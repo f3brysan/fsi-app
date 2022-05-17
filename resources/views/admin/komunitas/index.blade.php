@@ -61,10 +61,10 @@
                                                 @foreach ($komunitas as $get)  
                                             <tr>
                                                 <td>{{ $no++ }}</td>                                                  
-                                                <td>{{ $get->nama }} idnya {{ $get->id }}</td> 
+                                                <td>{{ $get->nama }}</td> 
                                                 <td>{{ $get->regional->nama }}</td>                                                                                               
                                                 <td>
-                                                    <a href="{{ route('komunitas.edit', $get->id) }}" class="btn btn-sm btn-primary"><i class="ri-pencil-line
+                                                    <a href="{{ route('komunitas.edit', $get->uuid) }}" class="btn btn-sm btn-primary"><i class="ri-pencil-line
                                                         "></i> Ubah</a>
                                                     <form onsubmit="return confirm('Apakah Anda Yakin ?');"
                                             action="{{ route('komunitas.destroy', $get->uuid) }}" method="POST" class="d-inline">                                            

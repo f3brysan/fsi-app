@@ -42,7 +42,7 @@
                                     </div>
                                     @endif
                                         <h4 class="card-title">Tambah Data Komunitas Baru</h4>                                        
-                                        <form action="{{ route('komunitas.store') }}" method="POST">
+                                        <form action="{{ route('komunitas.store') }}" method="POST" enctype="multipart/form-data">
                                            @csrf
                                             <div class="mb-3">
                                                 <label>Nama Komunitas</label>
@@ -83,6 +83,17 @@
                                                     {{ $message }}
                                                 </div>
                                                 @enderror
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="picture">Logo Komunitas</label>
+                                                <div class="input-group">
+                                                    <input type="file" class="form-control @error('picture') is-invalid @enderror" name="picture" id="picture" accept="image/*">
+                                                    @error('picture')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                                @enderror
+                                            </div>
                                             </div>
                                             <div class="mb-3">
                                             <label>Deskripsi Komunitas</label>

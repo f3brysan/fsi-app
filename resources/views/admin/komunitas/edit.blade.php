@@ -42,11 +42,12 @@
                                     </div>
                                     @endif
                                         <h4 class="card-title">Ubah Data Komunitas {{ $get->nama }}</h4>                                        
-                                        <form action="{{ route('komunitas.store') }}" method="POST">
+                                        <form action="{{ route('komunitas.update', $get->uuid) }}" method="POST">
                                            @csrf
+                                            @method('PUT')
                                             <div class="mb-3">
                                                 <label>Nama Komunitas</label>
-                                                <input type="text" class="form-control @error('nama') is-invalid @enderror" name="nama" id="nama" value="{{ old('nama') }}" 
+                                                <input type="text" class="form-control @error('nama') is-invalid @enderror" name="nama" id="nama" value="{{ old('nama', $get->nama) }}" 
                                                 required placeholder="Nama Komunitas"/>
                                                 @error('nama')
                                                 <div class="invalid-feedback">
@@ -56,7 +57,7 @@
                                             </div>
                                             <div class="mb-3">
                                                 <label>Nama Singkatan Komunitas</label>
-                                                <input type="text" class="form-control @error('singkatan') is-invalid @enderror" name="singkatan" id="singkatan" value="{{ old('singkatan') }}" 
+                                                <input type="text" class="form-control @error('singkatan') is-invalid @enderror" name="singkatan" id="singkatan" value="{{ old('singkatan', $get->singkatan) }}" 
                                                 required placeholder="Nama Singkatan Komunitas"/>
                                                 @error('singkatan')
                                                 <div class="invalid-feedback">
@@ -67,26 +68,25 @@
                                             <div class="mb-3">
                                                 <label>Tanggal Berdiri</label>
                                                 <div class="col-sm-3">
-                                                    <input class="form-control" type="date" id="example-date-input" name="tgl_berdiri">
+                                                    <input class="form-control" type="date" id="example-date-input" name="tgl_berdiri" value="{{ $get->tgl_berdiri }}">
                                                 </div>
                                             </div>
                                             <div class="mb-3">
                                                 <label>Asal Regional</label>                                                
-                                                <select class="form-control select2" name="regional_id">
-                                                    <option value="">-- Pilih Regional --</option>
+                                                <select class="form-control select2" name="regional_id">                                                                                                        
                                                     @foreach ($regionals as $reg)
-                                                        <option value="{{ $reg->uuid }}">{{ $reg->nama }}</option>
+                                                    @if (old('regional_id')==$reg->uuid)
+                                                       <option value="{{ $reg->uuid }}" selected>{{ $reg->nama }}</option>                                                                                                                  
+                                                       @else 
+                                                       <option value="{{ $reg->uuid }}">{{ $reg->nama }}</option>
+                                                    @endif
                                                     @endforeach                                                    
-                                                </select>
-                                                @error('singkatan')
-                                                <div class="invalid-feedback">
-                                                    {{ $message }}
-                                                </div>
-                                                @enderror
+                                                </select>                                                
                                             </div>
+
                                             <div class="mb-3">
                                             <label>Deskripsi Komunitas</label>
-										    <textarea class="form-control" name="content" id='content' rows="8"></textarea>
+										    <textarea class="form-control" name="content" id='content' rows="8">{{ old('content', $get->content) }}</textarea>
                                             </div>
                                             <div>
                                                 <button type="submit" class="btn btn-md btn-primary waves-effect waves-light me-1">

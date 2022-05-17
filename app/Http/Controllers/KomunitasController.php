@@ -44,7 +44,8 @@ class KomunitasController extends Controller
         $this->validate($request, [
             'nama' => 'required|string|max:100',
             'singkatan' => 'required|string|max:50',
-            'tgl_berdiri' => 'required',            
+            'tgl_berdiri' => 'required',
+            'picture' => 'image|file|max:1024'            
         ]);
 
         $uuid = Uuid::uuid4();
@@ -55,7 +56,8 @@ class KomunitasController extends Controller
             'singkatan' => $request->singkatan,
             'tgl_berdiri' => $request->tgl_berdiri,
             'content' => $request->content,
-            'regional_id' => $request->regional_id
+            'regional_id' => $request->regional_id,
+            'picture' => $request->file('picture')->store('komunitas-logo')
         ]);
 
         if ($komunitas) {
@@ -88,13 +90,16 @@ class KomunitasController extends Controller
      * @param  \App\Models\Komunitas  $komunitas
      * @return \Illuminate\Http\Response
      */
-    public function edit(Komunitas $komunitas)
+    public function edit(Komunitas $komunita)
     {   
         
-        $get = Komunitas::findOrFail($komunitas->id);
+        $get = Komunitas::findOrFail($komunita->id);
         // $get = dd();
-        // $regionals = Regional::orderBy('nama')->get();
-        return view('admin.komunitas.edit', compact('get'));
+        $regionals = Regional::orderBy('nama')->get();
+        return view('admin.komunitas.edit', [
+            'get' => $get,
+            'regionals' => $regionals
+        ] );
     }
 
     /**
@@ -104,9 +109,34 @@ class KomunitasController extends Controller
      * @param  \App\Models\Komunitas  $komunitas
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Komunitas $komunitas)
+    public function update(Request $request, Komunitas $komunita)
     {
-        //
+        $this->validate($request, [
+            'nama' => 'required|string|max:100',
+            'singkatan' => 'required|string|max:50',
+            'tgl_berdiri' => 'required'
+        ]);
+
+        $komunitas = Komunitas::findorfail($komunita->id);
+        $komunitas->update([
+            'nama' => $request->nama,
+            'slug' => Str::slug($request->nama),
+            'singkatan' => $request->singkatan,
+            'content' => $request->content,
+            'regional_id' => $request->regional_id
+        ]);
+        if ($komunitas) {
+            return redirect()
+            ->route('komunitas.index')
+            ->with(['success' => 'Data Komunitas berhasil diubah.']);
+        }
+        else {
+            return redirect()
+                ->back()
+                ->withInput()
+                ->with(['error' => 'Maaf ada kesalahan yang terjadi.']);
+        }
+
     }
 
     /**
@@ -115,13 +145,13 @@ class KomunitasController extends Controller
      * @param  \App\Models\Komunitas  $komunitas
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Komunitas $komunitas)
+    public function destroy(Komunitas $komunita)
     {
-        Komunitas::destroy($komunitas->id);
+        Komunitas::destroy($komunita->id);
             return redirect()
                 ->route('komunitas.index')
                 ->with([
-                    'success' => 'Data Regional berhasil dihapus.'
+                    'success' => 'Data Komunitas berhasil dihapus.'
                 ]);     
     }
     

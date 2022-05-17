@@ -22,6 +22,10 @@ class Komunitas extends Model
         'accepted_at'
     ];
     
+    public function getRouteKeyName()
+{
+    return 'uuid';
+}
 
     public function regional()
 {

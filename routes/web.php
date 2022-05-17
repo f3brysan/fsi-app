@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\KomunitasController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegionalController;
@@ -32,8 +33,11 @@ Route::post('/register', [RegisterController::class, 'store']);
 
 Route::get('/home', [DashboardController::class, 'index']);
 
+// ROUTING MASTER REGIONAL
 Route::resource('regional',RegionalController::class);
 // Route::get('/regional', [RegionalController::class, 'index'])->Middleware('auth');
+
+Route::resource('komunitas',KomunitasController::class);
 
 Route::get('/agenda', function () {
     return view('admin/agenda');

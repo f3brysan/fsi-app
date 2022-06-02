@@ -23,9 +23,9 @@ class Regional extends Model
     return 'uuid';
 }
 
-    public function komunitas()
+    public function Komunitas()
 {
-    return $this->hasMany(Komunitas::class);
+    return $this->hasMany(Komunitas::class, 'regional_id', 'uuid');
 }
 
 }

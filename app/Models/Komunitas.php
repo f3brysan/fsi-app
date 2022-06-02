@@ -30,9 +30,14 @@ class Komunitas extends Model
     return 'uuid';
 }
 
+    public function getScoutKeyName()
+    {
+        return 'regional_id';
+    }
+
     public function regional()
 {
-    return $this->belongsTo(Regional::class,'regional_id','uuid'); 
+    return $this->belongsTo(Regional::class,'regional_id','uuid')->orderBy('nama', 'desc'); 
 }
 
 }

@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Biodata;
 use App\Http\Requests\StoreBiodataRequest;
 use App\Http\Requests\UpdateBiodataRequest;
+use App\Models\Province;
+use App\Models\Regency;
+use App\Models\District;
+use App\Models\Village;
 
 class BiodataController extends Controller
 {
@@ -18,14 +22,16 @@ class BiodataController extends Controller
         //
     }
 
-    /**
+    /**co
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function create()
     {
-        return view('admin.biodata.create');
+        $prov = Province::all();
+        $kota = Regency::all();
+        return view('admin.biodata.create', compact('prov','kota'));
     }
 
     /**

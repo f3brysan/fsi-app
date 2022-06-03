@@ -57,7 +57,7 @@
                                     </div>
                                     <div class="col-md-8">
                                         <div class="card-body">
-                                            <h5 class="card-title">Hery Mulyanto</h5>
+                                            <h5 class="card-title">{{ $biodata->fullname }} ({{ $biodata->nickname }})</h5>
                                             <p class="card-text">Honda Supra Jakarta</p>
                                             <a href=""><p class="text-muted mb-0">Cek Profil <span class="fas fafas fa-arrow-right"></span></p></a>
                                         </div>

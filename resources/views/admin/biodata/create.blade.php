@@ -107,8 +107,31 @@
                                             </div>
                                             </div>
                                             <div class="mb-3">
-                                            <label>Deskripsi Komunitas</label>
-										    <textarea class="form-control" name="content" id='content' rows="8"></textarea>
+                                                <label>Provinsi Asal</label>  
+                                                <select class="form-control select2" name="regional_id">
+                                                    <option value="">-- Pilih Provinsi --</option>
+                                                    @foreach ($prov as $prov)
+                                                        <option value="{{ $prov->id }}">{{ $prov->name }}</option>
+                                                    @endforeach      
+                                                </select>
+                                                @error('province_id')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                                @enderror
+                                            </div><div class="mb-3">
+                                                <label>Kota Asal</label>  
+                                                <select class="form-control select2" name="city_id">
+                                                    <option value="">-- Pilih Kota --</option>
+                                                    @foreach ($kota as $kota)
+                                                        <option value="{{ $kota->id }}">{{ $kota->name }}</option>
+                                                    @endforeach      
+                                                </select>
+                                                @error('city_id')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                                @enderror
                                             </div>
                                             <div>
                                                 <button type="submit" class="btn btn-md btn-primary waves-effect waves-light me-1">

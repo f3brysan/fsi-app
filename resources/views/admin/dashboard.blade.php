@@ -52,14 +52,18 @@
                                 <div class="row no-gutters align-items-center">
                                     <div class="col-md-2">
                                       <div class="px-2">
-                                        <img class="card-img avatar-lg" src="assets/images/users/avatar-1.jpg" alt="Card image">
+                                        @if ($biodata->picture)
+                                        <img class="card-img avatar-lg" src="{{ asset('storage/'. $biodata->picture) }}" alt="{{ $biodata->fullname }}">   
+                                        @else
+                                        <img class="card-img avatar-lg" src="assets/images/users/avatar-1.jpg" alt="Card image"> 
+                                        @endif                                        
                                       </div>
                                     </div>
                                     <div class="col-md-8">
                                         <div class="card-body">
                                             <h5 class="card-title">{{ $biodata->fullname }} ({{ $biodata->nickname }})</h5>
                                             <p class="card-text">Honda Supra Jakarta</p>
-                                            <a href=""><p class="text-muted mb-0">Cek Profil <span class="fas fafas fa-arrow-right"></span></p></a>
+                                            <a href="{{ route('biodata.show',$biodata->uuid) }}"><p class="text-muted mb-0">Cek Profil <span class="fas fafas fa-arrow-right"></span></p></a>
                                         </div>
                                     </div>
                                 </div>

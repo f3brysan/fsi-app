@@ -43,6 +43,11 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function getRouteKeyName()
+{
+    return 'uuid';
+}
+
     public function Biodata()
     {
         return $this->hasOne(Biodata::class,'user_uuid','uuid');

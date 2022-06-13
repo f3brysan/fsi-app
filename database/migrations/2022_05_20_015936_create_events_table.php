@@ -23,7 +23,7 @@ class CreateEventsTable extends Migration
             $table->string('created_by',50);
             $table->decimal('poin',3)->nullable();            
             $table->timestamp('its_start');
-            $table->timestamp('its_end');
+            $table->dateTime('its_end');
             $table->timestamps();
             $table->softDeletes();
         });

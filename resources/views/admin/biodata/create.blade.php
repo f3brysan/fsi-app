@@ -47,7 +47,7 @@
                                             <div class="mb-3">
                                                 <label>Nama Lengkap</label>
                                                 <input type="text" class="form-control @error('nama') is-invalid @enderror" name="fullname" id="fullname" value="{{ old('fullname') }}" 
-                                                required placeholder="Nama Lengkap"/>
+                                                required placeholder="Contoh : Smith John"/>
                                                 @error('fullname')
                                                 <div class="invalid-feedback">
                                                     {{ $message }}
@@ -57,7 +57,7 @@
                                             <div class="mb-3">
                                                 <label>Nama Beken/Keren/Panggilan</label>
                                                 <input type="text" class="form-control @error('nickname') is-invalid @enderror" name="nickname" id="nickname" value="{{ old('nickname') }}" 
-                                                required placeholder="Nama Beken/Keren/Panggilan"/>
+                                                required placeholder="Contoh : Smith"/>
                                                 @error('nickname')
                                                 <div class="invalid-feedback">
                                                     {{ $message }}
@@ -67,7 +67,7 @@
                                             <div class="mb-3">
                                                 <label>No Handphone</label>
                                                 <input type="text" class="form-control @error('no_hp') is-invalid @enderror" name="no_hp" id="no_hp" value="{{ old('no_hp') }}" 
-                                                required placeholder="No Handphone"/>
+                                                required placeholder="Contoh : 0897XXXXXX"/>
                                                 @error('no_hp')
                                                 <div class="invalid-feedback">
                                                     {{ $message }}
@@ -77,7 +77,7 @@
                                             <div class="mb-3">
                                                 <label>Tempat Lahir</label>
                                                 <input type="text" class="form-control @error('birth_place') is-invalid @enderror" name="birth_place" id="birth_place" value="{{ old('birth_place') }}" 
-                                                required placeholder="Kota Kelahiran"/>
+                                                required placeholder="Contoh : Surakarta"/>
                                                 @error('birth_place')
                                                 <div class="invalid-feedback">
                                                     {{ $message }}
@@ -87,8 +87,8 @@
                                             <div class="mb-3">
                                                 <label>Tanggal Lahir</label>
                                                 <div class="col-sm-3">
-                                                    <input class="form-control @error('birth_day') is-invalid @enderror" type="date" id="example-date-input" name="tgl_berdiri">
-                                                    @error('birth_place')
+                                                    <input class="form-control @error('birth_day') is-invalid @enderror" type="date" id="example-date-input" name="birth_day">
+                                                    @error('birth_day')
                                                 <div class="invalid-feedback">
                                                     {{ $message }}
                                                 </div>
@@ -107,8 +107,8 @@
                                             </div>
                                             </div>
                                             <div class="mb-3">
-                                                <label>Provinsi Asal</label>  
-                                                <select class="form-control select2" name="regional_id">
+                                                <label>Provinsi Domisili Asal</label>  
+                                                <select class="form-control select2" name="province_id" id="provinsi">
                                                     <option value="">-- Pilih Provinsi --</option>
                                                     @foreach ($prov as $prov)
                                                         <option value="{{ $prov->id }}">{{ $prov->name }}</option>
@@ -117,17 +117,91 @@
                                                 @error('province_id')
                                                 <div class="invalid-feedback">
                                                     {{ $message }}
+                                            </div>
+                                                @enderror
+                                            </div>
+                                            <div class="mb-3">
+                                                <label>Kota/Kabupaten Domisili Asal</label>  
+                                                <select class="form-control select2" name="city_id" id="kabupaten" required>                                                    
+                                                </select>                                                
+                                            </div>
+                                            <div class="mb-3">
+                                                <label>Alamat Domisili Asal</label>
+                                                <input type="text" class="form-control @error('domisili') is-invalid @enderror" name="domisili" id="domisili" value="{{ old('domisili') }}" 
+                                                required placeholder="Contoh : Jl. Raya Kalimantan Blok AA. Kawasan Industri MM2100"/>
+                                                @error('domisili')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
                                                 </div>
                                                 @enderror
-                                            </div><div class="mb-3">
-                                                <label>Kota Asal</label>  
-                                                <select class="form-control select2" name="city_id">
-                                                    <option value="">-- Pilih Kota --</option>
-                                                    @foreach ($kota as $kota)
-                                                        <option value="{{ $kota->id }}">{{ $kota->name }}</option>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label>Jenis Kelamin</label>  
+                                                <select class="form-control select2" name="gender" id="gender" required>
+                                                    <option value="">-- Pilih Jenis Kelamin --</option>
+                                                        <option value="L">Laki - laki</option>   
+                                                        <option value="P">Perempuan</option>                                                    
+                                                </select>
+                                                @error('gender')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                            </div>
+                                                @enderror
+                                            </div>
+                                            <div class="mb-3">
+                                                <label>Golongan Darah</label>  
+                                                <select class="form-control select2" name="blood" id="blood" required>
+                                                    <option value="">-- Pilih Jenis Golongan Darah --</option>
+                                                        <option value="A">Golongan Darah A</option>   
+                                                        <option value="B">Golongan Darah B</option>
+                                                        <option value="O">Golongan Darah O</option>
+                                                        <option value="AB">Golongan Darah AB</option>                                                    
+                                                </select>
+                                                @error('blood')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                            </div>
+                                                @enderror
+                                            </div>
+                                            <div class="mb-3">
+                                                <label>Jenis Kendaraan</label>  
+                                                <select class="form-control select2" name="jenis_motor" id="jenis_motor">
+                                                    <option value="">-- Pilih Jenis Kendaraan --</option>
+                                                    @foreach ($motor as $motor)
+                                                        <option value="{{ $motor->uuid }}">{{ $motor->jenis_motor }}</option>
                                                     @endforeach      
                                                 </select>
-                                                @error('city_id')
+                                                @error('jenis_motor')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                            </div>
+                                                @enderror
+                                            </div>
+                                            <div class="mb-3">
+                                                <label>No Rangka</label>
+                                                <input type="text" class="form-control @error('no_rangka') is-invalid @enderror" name="no_rangka" id="no_rangka" value="{{ old('no_rangka') }}" 
+                                                required placeholder="Contih : MHB1231AWERGxxxxx"/>
+                                                @error('no_rangka')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                                @enderror
+                                            </div>
+                                            <div class="mb-3">
+                                                <label>No Mesin</label>
+                                                <input type="text" class="form-control @error('no_mesin') is-invalid @enderror" name="no_mesin" id="no_mesin" value="{{ old('no_mesin') }}" 
+                                                required placeholder="Contoh : J1A2321xxxx"/>
+                                                @error('no_mesin')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                                @enderror
+                                            </div>
+                                            <div class="mb-3">
+                                                <label>No SIM</label>
+                                                <input type="text" class="form-control @error('no_sim') is-invalid @enderror" name="no_sim" id="no_sim" value="{{ old('no_sim') }}" 
+                                                required placeholder="Contoh : 9912312XXX"/>
+                                                @error('no_sim')
                                                 <div class="invalid-feedback">
                                                     {{ $message }}
                                                 </div>
@@ -137,7 +211,7 @@
                                                 <button type="submit" class="btn btn-md btn-primary waves-effect waves-light me-1">
                                                     Submit
                                                 </button>
-                                                <a href="{{ route('regional.index') }}" class="btn btn-md btn-secondary">Back</a>
+                                                <a href="/home" class="btn btn-md btn-secondary">Back</a>
                                             </div>
                                         </form>                                        
                                     </div>
@@ -150,4 +224,4 @@
                 <!-- End Page-content -->    
                                       
 
-            @include('admin.footer')
+            @include('admin.biodata.footer')

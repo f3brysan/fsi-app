@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BiodataController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\IndoRegionController;
 use App\Http\Controllers\KomunitasController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
@@ -9,6 +10,7 @@ use App\Http\Controllers\PengpusEventController;
 use App\Http\Controllers\RegionalController;
 use App\Http\Controllers\RegisterController;
 use App\Models\Biodata;
+use AzisHapidin\IndoRegion\IndoRegion;
 use GuzzleHttp\Middleware;
 
 /*
@@ -30,12 +32,14 @@ Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/login', [LoginController::class, 'auth']);
 Route::post('/logout', [LoginController::class, 'logout']);
 
+
 // routing registrasi
 Route::get('/register', [RegisterController::class, 'index']);
 Route::post('/register', [RegisterController::class, 'store']);
 
-Route::get('/home', [DashboardController::class, 'index'])->middleware('auth');
+Route::get('/home', [DashboardController::class, 'index'])->middleware('auth')->name('home');
 Route::resource('/biodata', BiodataController::class)->middleware('auth');
+Route::get('/getkabupaten', [IndoRegionController::class, 'getKabupaten']);
 
 // ROUTING MASTER REGIONAL
 Route::resource('pengpus/regional',RegionalController::class);

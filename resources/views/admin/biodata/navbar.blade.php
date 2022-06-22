@@ -163,7 +163,11 @@
                                 data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <img class="rounded-circle header-profile-user" src="/../assets/images/users/avatar-1.jpg"
                                     alt="Header Avatar">
-                                <span class="d-none d-xl-inline-block ms-1">Hai, </span>
+                                <span class="d-none d-xl-inline-block ms-1">Hai, @if ($biodata)
+                                    {{ $biodata->nickname }}
+                                @else
+                                    Guest
+                                @endif</span>
                                 <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
                             </button>
                             <div class="dropdown-menu dropdown-menu-end">
@@ -192,7 +196,7 @@
                             <li class="menu-title">Menu</li>
 
                             <li>
-                                <a href="/beranda" class="waves-effect">
+                                <a href="/home" class="waves-effect">
                                     <i class="ri-dashboard-line"></i>
                                     <span>Beranda</span>
                                 </a>

@@ -51,7 +51,7 @@
                             <div class="card">
                                 <div class="row no-gutters align-items-center">
                                     <div class="col-md-2">
-                                      <div class="px-2">
+                                      <div class="px-2 mt-2">
                                         @if ($biodata->picture)
                                         <img class="card-img avatar-lg" src="{{ asset('storage/'. $biodata->picture) }}" alt="{{ $biodata->fullname }}">   
                                         @else
@@ -62,7 +62,11 @@
                                     <div class="col-md-8">
                                         <div class="card-body">
                                             <h5 class="card-title">{{ $biodata->fullname }} ({{ $biodata->nickname }})</h5>
-                                            <p class="card-text">Honda Supra Jakarta</p>
+                                            <p class="card-text">{{ $komunitas->nama }} ({{ $komunitas->singkatan }}) @if ($komunitas->is_approve == 0)
+                                              <span class="badge badge-soft-danger">Belum Terverfikasi</span>
+                                           @else
+                                               <span class="badge badge-soft-info">Member</span>
+                                           @endif</p>                                            
                                             <a href="{{ route('biodata.show',$biodata->uuid) }}"><p class="text-muted mb-0">Cek Profil <span class="fas fafas fa-arrow-right"></span></p></a>
                                         </div>
                                     </div>

@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AnggotaKomunitas;
 use App\Models\Motor;
 use Ramsey\Uuid\Uuid;
 use App\Models\Biodata;
+use App\Models\Komunitas;
 use App\Models\Province;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -19,6 +21,12 @@ class BiodataController extends Controller
     public function __construct()
     {
         $this->Biodata = new Biodata();
+        $this->AnggotaKomunitas = new AnggotaKomunitas();
+    }
+
+    public function session()
+    {
+
     }
     
      public function index()
@@ -98,11 +106,12 @@ class BiodataController extends Controller
      */
     public function show(Biodata $biodatum)
     {
-        $par = $biodatum->uuid;
-        $biodata = [
-            'get' => $this->Biodata->getBiodataUser($par)
-        ];       
-        dd($biodata) ;
+        $parr = $biodatum->uuid;
+        $biodata = $this->Biodata->getBiodataUser($parr)->first();
+        $komunitas = $this->AnggotaKomunitas->getKomunitasUser($parr)->first();        
+
+        // dd($komunitas);
+         return view ('admin.biodata.show',compact('parr', 'biodata', 'komunitas'));
         
     }
 

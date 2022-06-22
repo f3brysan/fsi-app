@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AirportController;
+use App\Http\Controllers\AnggotaKomunitasController;
 use App\Http\Controllers\BiodataController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\IndoRegionController;
@@ -9,6 +11,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PengpusEventController;
 use App\Http\Controllers\RegionalController;
 use App\Http\Controllers\RegisterController;
+use App\Models\AnggotaKomunitas;
 use App\Models\Biodata;
 use AzisHapidin\IndoRegion\IndoRegion;
 use GuzzleHttp\Middleware;
@@ -39,6 +42,8 @@ Route::post('/register', [RegisterController::class, 'store']);
 
 Route::get('/home', [DashboardController::class, 'index'])->middleware('auth')->name('home');
 Route::resource('/biodata', BiodataController::class)->middleware('auth');
+Route::resource('/anggotakomunitas', AnggotaKomunitasController::class)->middleware('auth');
+
 Route::get('/getkabupaten', [IndoRegionController::class, 'getKabupaten']);
 
 // ROUTING MASTER REGIONAL
@@ -60,3 +65,4 @@ Route::get('/poinku', function () {
 Route::get('/adart', function () {
     return view('admin/adart');
 });
+

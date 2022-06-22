@@ -4,9 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\Event;
 use Ramsey\Uuid\Uuid;
+use App\Models\Biodata;
 use App\Models\Komunitas;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 
 class PengpusEventController extends Controller
@@ -16,10 +19,19 @@ class PengpusEventController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function session()
+    {
+        $session = Auth::user()->uuid;
+        $biodata = Biodata::where('user_uuid', $session)->first();
+        return $biodata;
+    }
+    
     public function index()
     {
+        $biodata = $this->session();
         $events = Event::with('komunitas')->orderBy('its_start')->get();
-        return view('admin.event.index', compact('events'));
+        // dd ($events);
+        return view('admin.event.index', compact('events', 'biodata'));
     }
 
     /**
@@ -29,8 +41,9 @@ class PengpusEventController extends Controller
      */
     public function create()
     {
+        $biodata = $this->session();
         $komunitas = Komunitas::with('regional')->get();
-        return view('admin.event.create', compact('komunitas'));
+        return view('admin.event.create', compact('komunitas', 'biodata'));
     }
 
     /**
@@ -64,7 +77,7 @@ class PengpusEventController extends Controller
         if ($event) {
             return redirect()
             ->route('event.index')
-            ->with(['success' => 'Data Komunitas berhasil ditambahkan.']);
+            ->with(['success' => 'Event baru berhasil ditambahkan.']);
         }
         else {
             return redirect()
@@ -93,7 +106,11 @@ class PengpusEventController extends Controller
      */
     public function edit(Event $event)
     {
-        //
+        $biodata = $this->session();
+        $get = Event::findOrFail($event->id);
+        $komunitas = Komunitas::with('regional')->get();
+
+        return view('admin.event.edit', compact('biodata', 'get', 'komunitas'));
     }
 
     /**
@@ -105,7 +122,49 @@ class PengpusEventController extends Controller
      */
     public function update(Request $request, Event $event)
     {
-        //
+        $this->validate($request, [
+            'nama' => 'required|max:150',
+            'its_start' => 'required',
+            'its_end' => 'required',
+            'created_by' => 'required',
+            'picture' => 'image|file|max:2048'           
+        ]);
+
+        $event = Event::findorfail($event->id);
+        if($request->picture == NULL){
+            $event->update([                
+                'nama' => $request->nama,
+                'slug' => Str::slug($request->nama),
+                'its_start' => $request->its_start,
+                'its_end' => $request->its_end,
+                'created_by' => $request->created_by,
+                'content' => $request->content                         
+            ]);        
+        }
+        else{
+            Storage::delete($request->oldPicture);
+            $event->update([                
+                'nama' => $request->nama,
+                'slug' => Str::slug($request->nama),
+                'its_start' => $request->its_start,
+                'its_end' => $request->its_end,
+                'created_by' => $request->created_by,
+                'content' => $request->content,            
+                'picture' => $request->file('picture')->store('event-image')
+            ]);    
+        }
+
+        if ($event) {
+            return redirect()
+            ->route('event.index')
+            ->with(['success' => 'Event '.$event->nama.' berhasil Diedit.']);
+        }
+        else {
+            return redirect()
+                ->back()
+                ->withInput()
+                ->with(['error' => 'Maaf ada kesalahan yang terjadi.']);
+        }
     }
 
     /**
@@ -115,7 +174,13 @@ class PengpusEventController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy(Event $event)
-    {
-        //
+    {   
+        Storage::delete($event->picture);
+        Event::destroy($event->id);
+            return redirect()
+                ->route('event.index')
+                ->with([
+                    'success' => 'Event '.$event->nama.' berhasil dihapus.'
+                ]); 
     }
 }

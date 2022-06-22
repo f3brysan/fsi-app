@@ -18,4 +18,8 @@ class Event extends Model
 {
     return $this->belongsTo(Komunitas::class,'created_by','uuid'); 
 }
+    public function getRouteKeyName()
+{
+    return 'uuid';
+}
 }

@@ -26,7 +26,7 @@
 
                         <div class="row">
                             <div class="col-12">
-                                <h4>Data Komunitas</h4>
+                                <h4>Data Events</h4>
                                 <div class="card">
                                     <div class="card-body">
                                         <!-- Notifikasi menggunakan flash session data -->
@@ -63,17 +63,27 @@
                                                 @foreach ($events as $get)  
                                             <tr>
                                                 <td>{{ $no++ }}</td>                                                  
-                                                <td>{{ $get->nama }}</td> 
+                                                <td><a href="{{ route('event.show', $get->uuid) }}">{{ $get->nama }}</a></td> 
                                                 <td>{{ $get->komunitas->nama }}</td>
                                                 <td>{{ date('Y-m-d', strtotime($get->its_start) ) }} / {{ date('Y-m-d', strtotime($get->its_end ))}}</td>
-                                                <td>Status</td>                                                                                               
+                                                <td>
+                                                    @php
+                                                        $dateNow = date("Y-m-d H:i:s");
+                                                    @endphp
+                                                @if ($get->its_start > $dateNow)
+                                                    Belum Dimulai
+                                                @elseif ($get->its_start < $dateNow &&$get->its_end > $dateNow)
+                                                    Berlangsung
+                                                @else
+                                                    Berakhir
+                                                @endif</td>                                                                                               
                                                 <td>
                                                     <a href="{{ route('event.edit', $get->uuid) }}" class="btn btn-sm btn-primary"><i class="ri-pencil-line
                                                         "></i> Ubah</a>
-                                                    <form onsubmit="return confirm('Apakah Anda Yakin ?');"
-                                            action="{{ route('event.destroy', $get->uuid) }}" method="POST" class="d-inline">                                            
+                                                    <form onsubmit="return confirm('Apakah Anda Yakin Menghapus Event {{ $get->nama }}?');"
+                                            action="{{ route('event.destroy', $get->uuid) }}" method="POST" class="d-inline">          
                                             @method('DELETE')
-                                            @csrf                                            
+                                            @csrf 
                                             <button type="submit" class="btn btn-sm btn-danger"><i class="ri-delete-bin-2-line"></i> Hapus</button>
                                         </form>
                                                 </td>

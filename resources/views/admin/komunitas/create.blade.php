@@ -67,7 +67,7 @@
                                             <div class="mb-3">
                                                 <label>Tanggal Berdiri</label>
                                                 <div class="col-sm-3">
-                                                    <input class="form-control" type="date" id="example-date-input" name="tgl_berdiri">
+                                                    <input class="form-control" type="date" id="example-date-input" name="tgl_berdiri" value="{{ old('tgl_berdiri') }}">
                                                 </div>
                                             </div>
                                             <div class="mb-3">
@@ -86,8 +86,11 @@
                                             </div>
                                             <div class="mb-3">
                                                 <label for="picture">Logo Komunitas</label>
+                                                <div class="mb-3">
+                                                <img src="https://www.riobeauty.co.uk/images/product_image_not_found.gif" class="img-fluid mb-3" id="category-img-tag" width="200px" /> 
+                                                </div>
                                                 <div class="input-group">
-                                                    <input type="file" class="form-control @error('picture') is-invalid @enderror" name="picture" id="picture" accept="image/*">
+                                                    <input type="file" class="form-control @error('picture') is-invalid @enderror" name="picture" id="cat_image" accept="image/*" onchange="previewImage">
                                                     @error('picture')
                                                 <div class="invalid-feedback">
                                                     {{ $message }}
@@ -114,6 +117,19 @@
                     </div> <!-- container-fluid -->
                 </div>
                 <!-- End Page-content -->    
-                                      
+                <script>
+                    function previewImage(){
+                       const image = document.querySelector('#image');
+                       const imgPreview = document.querySelector('.image-preview'); 
+
+                       imgPreview.style.display= 'block';
+
+                       const oFReader = new FileReader();
+                       oFReader.readAsDataURL(image.files[0]);
+                       oFReader.onload = function(ofREvent){
+                        imgPreview.src = ofREvent.target.result;
+                       }
+                    }
+                </script>                      
 
             @include('admin.footer')

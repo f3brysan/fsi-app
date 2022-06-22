@@ -3,11 +3,14 @@
 namespace App\Http\Controllers;
 
 use Ramsey\Uuid\Uuid;
+use App\Models\Biodata;
 use App\Models\Regional;
 use App\Models\Komunitas;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class KomunitasController extends Controller
 {
@@ -16,10 +19,18 @@ class KomunitasController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function session()
+    {
+        $session = Auth::user()->uuid;        
+        $biodata = Biodata::where('user_uuid', $session)->first();
+        return $biodata;
+    }
+
     public function index()
     {
+        $biodata = $this->session();
         $komunitas = Komunitas::with('regional')->orderBy('nama')->get();
-        return view('admin.komunitas.index', compact('komunitas'));
+        return view('admin.komunitas.index', compact('komunitas', 'biodata'));
     }
 
     /**
@@ -29,8 +40,9 @@ class KomunitasController extends Controller
      */
     public function create()
     {
+        $biodata = $this->session();
         $regionals = Regional::orderBy('nama')->get();
-        return view('admin.komunitas.create', compact('regionals'));
+        return view('admin.komunitas.create', compact('regionals', 'biodata'));
     }
 
     /**
@@ -49,21 +61,36 @@ class KomunitasController extends Controller
         ]);
 
         $uuid = Uuid::uuid4();
-        $komunitas = Komunitas::create([
-            'uuid' => $uuid,
-            'nama' => $request->nama,
-            'slug' => Str::slug($request->nama),
-            'singkatan' => $request->singkatan,
-            'tgl_berdiri' => $request->tgl_berdiri,
-            'content' => $request->content,
-            'regional_id' => $request->regional_id,
-            'picture' => $request->file('picture')->store('komunitas-logo')
-        ]);
+
+        if($request->picture == NULL){
+            $komunitas = Komunitas::create([
+                'uuid' => $uuid,
+                'nama' => $request->nama,
+                'slug' => Str::slug($request->nama),
+                'singkatan' => $request->singkatan,
+                'tgl_berdiri' => $request->tgl_berdiri,
+                'content' => $request->content,
+                'regional_id' => $request->regional_id                
+            ]);        
+        }
+        else{
+            $komunitas = Komunitas::create([
+                'uuid' => $uuid,
+                'nama' => $request->nama,
+                'slug' => Str::slug($request->nama),
+                'singkatan' => $request->singkatan,
+                'tgl_berdiri' => $request->tgl_berdiri,
+                'content' => $request->content,
+                'regional_id' => $request->regional_id,
+                'picture' => $request->file('picture')->store('komunitas-logo')
+            ]);    
+        }
+        
 
         if ($komunitas) {
             return redirect()
             ->route('komunitas.index')
-            ->with(['success' => 'Data Komunitas berhasil ditambahkan.']);
+            ->with(['success' => 'Data Komunitas '.$request->nama.' berhasil ditambahkan.']);
         }
         else {
             return redirect()
@@ -92,14 +119,11 @@ class KomunitasController extends Controller
      */
     public function edit(Komunitas $komunita)
     {   
-        
+        $biodata = $this->session();
         $get = Komunitas::findOrFail($komunita->id);
         // $get = dd();
         $regionals = Regional::orderBy('nama')->get();
-        return view('admin.komunitas.edit', [
-            'get' => $get,
-            'regionals' => $regionals
-        ] );
+        return view('admin.komunitas.edit', compact('get', 'regionals', 'biodata'));
     }
 
     /**
@@ -118,17 +142,34 @@ class KomunitasController extends Controller
         ]);
 
         $komunitas = Komunitas::findorfail($komunita->id);
-        $komunitas->update([
-            'nama' => $request->nama,
-            'slug' => Str::slug($request->nama),
-            'singkatan' => $request->singkatan,
-            'content' => $request->content,
-            'regional_id' => $request->regional_id
-        ]);
+
+        if($request->picture){
+            Storage::delete($request->oldPicture);
+            $komunitas->update([                
+                'nama' => $request->nama,
+                'slug' => Str::slug($request->nama),
+                'singkatan' => $request->singkatan,
+                'tgl_berdiri' => $request->tgl_berdiri,
+                'content' => $request->content,
+                'regional_id' => $request->regional_id,
+                'picture' => $request->file('picture')->store('komunitas-logo')
+            ]);
+        }
+        else{
+            $komunitas->update([                
+                'nama' => $request->nama,
+                'slug' => Str::slug($request->nama),
+                'singkatan' => $request->singkatan,
+                'tgl_berdiri' => $request->tgl_berdiri,
+                'content' => $request->content,
+                'regional_id' => $request->regional_id,                
+            ]);
+        }
+        
         if ($komunitas) {
             return redirect()
             ->route('komunitas.index')
-            ->with(['success' => 'Data Komunitas berhasil diubah.']);
+            ->with(['success' => 'Data Komunitas '.$request->nama.' berhasil diubah.']);
         }
         else {
             return redirect()
@@ -151,7 +192,7 @@ class KomunitasController extends Controller
             return redirect()
                 ->route('komunitas.index')
                 ->with([
-                    'success' => 'Data Komunitas berhasil dihapus.'
+                    'success' => 'Data Komunitas '.$komunita->nama.' berhasil dihapus.'
                 ]);     
     }
     

@@ -42,7 +42,7 @@
                                     </div>
                                     @endif
                                         <h4 class="card-title">Ubah Data Komunitas {{ $get->nama }}</h4>                                        
-                                        <form action="{{ route('komunitas.update', $get->uuid) }}" method="POST">
+                                        <form action="{{ route('komunitas.update', $get->uuid) }}" method="POST" enctype="multipart/form-data">
                                            @csrf
                                             @method('PUT')
                                             <div class="mb-3">
@@ -72,16 +72,37 @@
                                                 </div>
                                             </div>
                                             <div class="mb-3">
-                                                <label>Asal Regional</label>                                                
-                                                <select class="form-control select2" name="regional_id">                                                                                                        
+                                                <label>Asal Regional</label>
+                                                <select class="form-control select2" name="regional_id">
                                                     @foreach ($regionals as $reg)
-                                                    @if (old('regional_id')==$reg->uuid)
-                                                       <option value="{{ $reg->uuid }}" selected>{{ $reg->nama }}</option>                                                                                                                  
+                                                    @if (old('regional_id', $get->regional_id)==$reg->uuid)
+                                                       <option value="{{ $reg->uuid }}" selected>{{ $reg->nama }}</option>        
                                                        @else 
                                                        <option value="{{ $reg->uuid }}">{{ $reg->nama }}</option>
                                                     @endif
-                                                    @endforeach                                                    
-                                                </select>                                                
+                                                    @endforeach
+                                                </select>        
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="picture">Logo Komunitas</label>
+                                                <input type="hidden" name="oldPicture" value="{{ $get->picture }}">
+                                                @if ($get->picture)
+                                                <div class="mb-3">
+                                                    <img src="{{ asset('storage/'.$get->picture) }}" class="img-fluid mb-3" id="category-img-tag" width="200px" /> 
+                                                    </div>   
+                                                @else
+                                                 <div class="mb-3">
+                                                <img src="https://www.riobeauty.co.uk/images/product_image_not_found.gif" class="img-fluid mb-3" id="category-img-tag" width="200px" /> 
+                                                </div>   
+                                                @endif                                                
+                                                <div class="input-group">
+                                                    <input type="file" class="form-control @error('picture') is-invalid @enderror" name="picture" id="cat_image" accept="image/*" onchange="previewImage">
+                                                    @error('picture')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                                @enderror
+                                            </div>
                                             </div>
 
                                             <div class="mb-3">

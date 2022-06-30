@@ -31,7 +31,7 @@ class PengpusEventController extends Controller
         $biodata = $this->session();
         $events = Event::with('komunitas')->orderBy('its_start')->get();
         // dd ($events);
-        return view('admin.event.index', compact('events', 'biodata'));
+        return view('master.event.index', compact('events', 'biodata'));
     }
 
     /**
@@ -43,7 +43,7 @@ class PengpusEventController extends Controller
     {
         $biodata = $this->session();
         $komunitas = Komunitas::with('regional')->get();
-        return view('admin.event.create', compact('komunitas', 'biodata'));
+        return view('master.event.create', compact('komunitas', 'biodata'));
     }
 
     /**
@@ -110,7 +110,7 @@ class PengpusEventController extends Controller
         $get = Event::findOrFail($event->id);
         $komunitas = Komunitas::with('regional')->get();
 
-        return view('admin.event.edit', compact('biodata', 'get', 'komunitas'));
+        return view('master.event.edit', compact('biodata', 'get', 'komunitas'));
     }
 
     /**

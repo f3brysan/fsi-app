@@ -162,7 +162,7 @@
                         <div class="dropdown d-inline-block user-dropdown">
                             <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown"
                                 data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <img class="rounded-circle header-profile-user" src="/../assets/images/users/avatar-1.jpg"
+                                <img class="rounded-circle header-profile-user" src="{{ asset('storage/'.$biodata->picture) }}"
                                     alt="Header Avatar">
                                 <span class="d-none d-xl-inline-block ms-1">Hai, @if ($biodata)
                                     {{ $biodata->nickname }}                                
@@ -202,7 +202,7 @@
                             </li>
 
                             <li>
-                                <a href="/agenda" class=" waves-effect">
+                                <a href="{{ route('event.index') }}" class=" waves-effect">
                                     <i class="ri-calendar-2-line"></i>
                                     <span>Agenda</span>
                                 </a>
@@ -250,14 +250,14 @@
 
                             <li class="menu-title">Master Data</li>
                             <li>
-                                <a href="/regional" >
+                                <a href="{{ route('PPregionals.index') }}" >
                                     <i class="ri-database-2-line"></i>
                                     <span>Data Regional</span>
                                 </a>                                
                             </li>
 
                             <li>
-                                <a href="{{ route('komunitas.index') }}" >
+                                <a href="{{ route('PPkomunitas.index') }}" >
                                     <i class="ri-database-line"></i>
                                     <span>Data Komunitas</span>
                                 </a>                                
@@ -271,12 +271,18 @@
                             </li>
 
                             <li>
-                                <a href="{{ route('event.index') }}" >
+                                <a href="{{ route('PPevents.index') }}" >
                                     <i class="ri-map-pin-4-fill"></i>
                                     <span>Data Event</span>
                                 </a>                                
                             </li>
 
+                            <li>
+                                <a href="{{ route('PPgifts.index') }}" >
+                                    <i class="ri-gift-fill"></i>
+                                    <span>Data Hadiah</span>
+                                </a>                                
+                            </li>
                         </ul>
                     </div>
                     <!-- Sidebar -->

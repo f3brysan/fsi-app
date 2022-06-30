@@ -28,12 +28,7 @@ class Komunitas extends Model
     public function getRouteKeyName()
 {
     return 'uuid';
-}
-
-    public function getScoutKeyName()
-    {
-        return 'regional_id';
-    }
+}   
 
     public function regional()
 {

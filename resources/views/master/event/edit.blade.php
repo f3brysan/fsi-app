@@ -14,7 +14,7 @@
                                     <h4 class="mb-sm-0">Edit Event</h4>
                                     <div class="page-title-right">
                                         <ol class="breadcrumb m-0">
-                                            <li class="breadcrumb-item"><a href="{{ route('event.index') }}"> Data Event</a></li>                                            
+                                            <li class="breadcrumb-item"><a href="{{ route('PPevents.index') }}"> Data Event</a></li>                                            
                                             <li class="breadcrumb-item active">Edit Event</li>
                                         </ol>
                                     </div>
@@ -42,7 +42,7 @@
                                     </div>
                                     @endif
                                         <h4 class="card-title">Tambah Data Event Baru</h4>                                        
-                                        <form action="{{ route('event.update', $get->uuid) }}" method="POST" enctype="multipart/form-data">
+                                        <form action="{{ route('PPevents.update', $get->uuid) }}" method="POST" enctype="multipart/form-data">
                                            @csrf
                                            @method('PUT')
                                             <div class="mb-3">
@@ -130,7 +130,7 @@
                                                 <button type="submit" class="btn btn-md btn-primary waves-effect waves-light me-1">
                                                     Submit
                                                 </button>
-                                                <a href="{{ route('event.index') }}" class="btn btn-md btn-secondary">Back</a>
+                                                <a href="{{ route('PPevents.index') }}" class="btn btn-md btn-secondary">Back</a>
                                             </div>
                                         </form>                                        
                                     </div>

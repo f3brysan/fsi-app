@@ -3,8 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Event;
+use App\Models\Biodata;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 use App\Http\Requests\StoreEventRequest;
 use App\Http\Requests\UpdateEventRequest;
+use App\Models\Attendant;
 
 class EventController extends Controller
 {
@@ -13,9 +17,18 @@ class EventController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function session()
+    {
+        $session = Auth::user()->uuid;
+        $biodata = Biodata::where('user_uuid', $session)->first();
+        return $biodata;
+    }
+    
     public function index()
     {
-        //
+        $biodata = $this->session();
+        $events = Event::with('komunitas')->orderby('its_start', 'DESC')->get();
+        return view('event.index', compact('biodata', 'events'));
     }
 
     /**
@@ -45,9 +58,18 @@ class EventController extends Controller
      * @param  \App\Models\Event  $event
      * @return \Illuminate\Http\Response
      */
-    public function show(Event $event)
+    public function show(Request $request)
     {
-        //
+        $biodata = $this->session();
+        $slug = $request->slug;
+        $event = Event::with('komunitas')->where('slug', $slug)->first();
+        $attendant = Attendant::with('event')
+                            ->where('biodata_uuid', $biodata->uuid)
+                            ->where('event_uuid', $event->uuid)
+                            ->first();
+        // dd($attendant);
+        
+        return view('event.show', compact('event', 'biodata', 'attendant'));
     }
 
     /**

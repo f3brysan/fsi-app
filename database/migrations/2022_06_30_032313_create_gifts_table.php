@@ -3,8 +3,9 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use phpDocumentor\Reflection\Types\Nullable;
 
-class CreateEventsTable extends Migration
+class CreateGiftsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,19 +14,14 @@ class CreateEventsTable extends Migration
      */
     public function up()
     {
-        Schema::create('events', function (Blueprint $table) {
+        Schema::create('gifts', function (Blueprint $table) {
             $table->id();
             $table->uuid('uuid');
-            $table->string('nama',150);
-            $table->string('slug',150);
+            $table->string('nama',50);
+            $table->decimal('price',8,0)->nullable();
             $table->text('content')->nullable();
             $table->string('picture')->nullable();
-            $table->string('created_by',50);
-            $table->decimal('poin',8,0)->nullable();            
-            $table->timestamp('its_start');
-            $table->dateTime('its_end');
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
@@ -36,6 +32,6 @@ class CreateEventsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('events');
+        Schema::dropIfExists('gifts');
     }
 }

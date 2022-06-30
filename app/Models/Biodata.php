@@ -31,14 +31,25 @@ class Biodata extends Model
         return $this->belongsTo(Motor::class, 'jenis_motor', 'uuid');
     }
 
-    public function getBiodataUser($par)
+    public function AnggotaKomunitas()
+    {
+        return $this->hasOne(AnggotaKomunitas::class, 'uuid', 'biodata_uuid' );
+    }
+
+    public function Attendant()
+    {
+        return $this->hasMany(Attendant::class, 'biodata_uuid', 'uuid' );
+    }
+
+    public function getBiodataUser($parr)
     {
         return DB::table('biodatas')
+                ->select('*', 'provinces.name AS provinsi', 'regencies.name AS kota')
                 ->leftJoin('users', 'users.uuid', '=', 'biodatas.user_uuid')
                 ->leftJoin('motors', 'motors.uuid', '=', 'biodatas.jenis_motor')
                 ->leftJoin('provinces', 'provinces.id', '=', 'biodatas.province_id')
                 ->leftJoin('regencies', 'regencies.id', '=', 'biodatas.city_id')
-                ->where('biodatas.uuid', '=', $par)
+                ->where('biodatas.uuid', '=', $parr)
                 ->get();
         
     }

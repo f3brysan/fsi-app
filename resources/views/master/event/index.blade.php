@@ -1,4 +1,4 @@
-@include('admin.navbar')
+@include('navbar')
 <!-- ============================================================== -->
             <!-- Start right Content here -->
             <!-- ============================================================== -->
@@ -11,11 +11,11 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                                    <h4 class="mb-sm-0">Data Regional</h4>
+                                    <h4 class="mb-sm-0">Data Event/Agenda</h4>
 
                                     <div class="page-title-right">
                                         <ol class="breadcrumb m-0">                                            
-                                            <li class="breadcrumb-item active">Data Regional</li>
+                                            <li class="breadcrumb-item active">Data Event/Agenda</li>
                                         </ol>
                                     </div>
 
@@ -26,7 +26,7 @@
 
                         <div class="row">
                             <div class="col-12">
-                                <h4>Data Regional</h4>
+                                <h4>Data Events</h4>
                                 <div class="card">
                                     <div class="card-body">
                                         <!-- Notifikasi menggunakan flash session data -->
@@ -41,15 +41,18 @@
                                             {{ session('error') }}
                                         </div>
                                         @endif
-                                                <h4 class="card-title">Data Regional</h4>
-                                        <p class="card-title-desc">Berikut adalah daftar regional di Federasi Supra Indonesia.
+                                                <h4 class="card-title">Data Event/Agenda</h4>
+                                        <p class="card-title-desc">Berikut adalah daftar <em>event</em>, acara, dan agenda di Federasi Supra Indonesia.
                                         </p>
-                                        <a href="{{ route('regional.create') }}" class="btn btn-sm btn-primary mb-3 float-right"><i class="ri-add-box-fill"></i> Tambah Baru</a>
+                                        <a href="{{ route('PPevents.create') }}" class="btn btn-sm btn-primary mb-3 float-right"><i class="ri-add-box-fill"></i> Tambah Baru</a>
                                         <table id="regionalsTable" class="table table-responsive">
                                             <thead>
                                             <tr>                                               
                                                 <th>No</th>
-                                                <th>Nama Regional</th>                                                                                     
+                                                <th>Nama Acara</th>
+                                                <th>Penyelenggara</th>
+                                                <th>Mulai/Berakhir</th>
+                                                <th>Status</th>                                                                                     
                                                 <th>Aksi</th>
                                             </tr>
                                             </thead>
@@ -57,17 +60,30 @@
                                                 @php
                                                     $no = 1;
                                                 @endphp
-                                                @foreach ($regionals as $regional)  
+                                                @foreach ($events as $get)  
                                             <tr>
                                                 <td>{{ $no++ }}</td>                                                  
-                                                <td>{{ $regional['nama'] }}</td>                                                                                                
+                                                <td><a href="{{ route('PPevents.show', $get->uuid) }}">{{ $get->nama }}</a></td> 
+                                                <td>{{ $get->komunitas->nama }}</td>
+                                                <td>{{ date('Y-m-d', strtotime($get->its_start) ) }} / {{ date('Y-m-d', strtotime($get->its_end ))}}</td>
                                                 <td>
-                                                    <a href="{{ route('regional.edit', $regional->uuid) }}" class="btn btn-sm btn-primary"><i class="ri-pencil-line
+                                                    @php
+                                                        $dateNow = date("Y-m-d H:i:s");
+                                                    @endphp
+                                                @if ($get->its_start > $dateNow)
+                                                    Belum Dimulai
+                                                @elseif ($get->its_start < $dateNow &&$get->its_end > $dateNow)
+                                                    Berlangsung
+                                                @else
+                                                    Berakhir
+                                                @endif</td>                                                                                               
+                                                <td>
+                                                    <a href="{{ route('PPevents.edit', $get->uuid) }}" class="btn btn-sm btn-primary"><i class="ri-pencil-line
                                                         "></i> Ubah</a>
-                                                    <form onsubmit="return confirm('Apakah Anda Yakin ?');"
-                                            action="{{ route('regional.destroy', $regional->uuid) }}" method="POST" class="d-inline">                                            
+                                                    <form onsubmit="return confirm('Apakah Anda Yakin Menghapus Event {{ $get->nama }}?');"
+                                            action="{{ route('PPevents.destroy', $get->uuid) }}" method="POST" class="d-inline">          
                                             @method('DELETE')
-                                            @csrf                                            
+                                            @csrf 
                                             <button type="submit" class="btn btn-sm btn-danger"><i class="ri-delete-bin-2-line"></i> Hapus</button>
                                         </form>
                                                 </td>
@@ -86,4 +102,4 @@
                 <!-- End Page-content -->    
                                       
 
-            @include('admin.footer')
+            @include('footer')

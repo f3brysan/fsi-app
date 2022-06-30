@@ -1,4 +1,4 @@
-@include('admin.navbar')
+@include('navbar')
 <!-- ============================================================== -->
             <!-- Start right Content here -->
             <!-- ============================================================== -->
@@ -11,11 +11,11 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                                    <h4 class="mb-sm-0">Tambah Data Event</h4>
+                                    <h4 class="mb-sm-0">Ubah Data Komunitas</h4>
                                     <div class="page-title-right">
                                         <ol class="breadcrumb m-0">
-                                            <li class="breadcrumb-item"><a href="{{ route('event.index') }}"> Data Event</a></li>                                            
-                                            <li class="breadcrumb-item active">Tambah Data Event</li>
+                                            <li class="breadcrumb-item"><a href="{{ route('PPkomunitas.index') }}"> Data Komunitas</a></li>                                            
+                                            <li class="breadcrumb-item active">Ubah Data Komunitas</li>
                                         </ol>
                                     </div>
                                 </div>
@@ -26,7 +26,7 @@
 
                         <div class="row">
                             <div class="col-12">
-                                <h4>Tambah Data Event</h4>
+                                <h4>Ubah  Data Komunitas</h4>
                                 <div class="card">
                                     <div class="card-body">
                                         <!-- Notifikasi menggunakan flash session data -->
@@ -41,63 +41,60 @@
                                         {{ session('error') }}
                                     </div>
                                     @endif
-                                        <h4 class="card-title">Tambah Data Event Baru</h4>                                        
-                                        <form action="{{ route('event.store') }}" method="POST" enctype="multipart/form-data">
+                                        <h4 class="card-title">Ubah Data Komunitas {{ $get->nama }}</h4>                                        
+                                        <form action="{{ route('PPkomunitas.update', $get->uuid) }}" method="POST" enctype="multipart/form-data">
                                            @csrf
+                                            @method('PUT')
                                             <div class="mb-3">
-                                                <label>Nama Acara</label>
-                                                <input type="text" class="form-control @error('nama') is-invalid @enderror" name="nama" id="nama" value="{{ old('nama') }}" required placeholder="Nama Acara"/>
+                                                <label>Nama Komunitas</label>
+                                                <input type="text" class="form-control @error('nama') is-invalid @enderror" name="nama" id="nama" value="{{ old('nama', $get->nama) }}" 
+                                                required placeholder="Nama Komunitas"/>
                                                 @error('nama')
                                                 <div class="invalid-feedback">
                                                     {{ $message }}
                                                 </div>
                                                 @enderror
-                                            </div>                                            
+                                            </div>
                                             <div class="mb-3">
-                                                <label for="example-datetime-local-input" class="col-sm-2 col-form-label">Tanggal Acara Dimulai</label>
-                                            <div class="col-sm-10">
-                                                <input class="form-control @error('its_start') is-invalid @enderror " type="datetime-local" value="{{ old('its_start') }}" id="example-datetime-local-input" name="its_start">
-                                                @error('its_start')
+                                                <label>Nama Singkatan Komunitas</label>
+                                                <input type="text" class="form-control @error('singkatan') is-invalid @enderror" name="singkatan" id="singkatan" value="{{ old('singkatan', $get->singkatan) }}" 
+                                                required placeholder="Nama Singkatan Komunitas"/>
+                                                @error('singkatan')
                                                 <div class="invalid-feedback">
                                                     {{ $message }}
                                                 </div>
                                                 @enderror
                                             </div>
-                                            </div>
                                             <div class="mb-3">
-                                                <label for="example-datetime-local-input" class="col-sm-2 col-form-label">Tanggal Acara Selesai</label>
-                                            <div class="col-sm-10">
-                                                <input class="form-control @error('its_end') is-invalid @enderror " type="datetime-local" value="{{ old('its_end') }}" id="example-datetime-local-input" name="its_end">
-                                                @error('its_end')
-                                                <div class="invalid-feedback">
-                                                    {{ $message }}
+                                                <label>Tanggal Berdiri</label>
+                                                <div class="col-sm-3">
+                                                    <input class="form-control" type="date" id="example-date-input" name="tgl_berdiri" value="{{ $get->tgl_berdiri }}">
                                                 </div>
-                                                @enderror
-                                            </div>
                                             </div>
                                             <div class="mb-3">
-                                                <label>Komunitas Penyelenggara</label>                                                
-                                                <select class="form-control select2" name="created_by">
-                                                    <option value="">-- Pilih Komunitas --</option>
-                                                    @foreach ($komunitas as $get)
-                                                    @if (old('created_by')==$get->uuid)
-                                                    <option value="{{ $get->uuid }}" selected>{{ $get->regional->nama}} - {{ $get->nama }} ({{ $get->singkatan }})</option>
-                                                    @else
-                                                    <option value="{{ $get->uuid }}">{{ $get->regional->nama}} - {{ $get->nama }} ({{ $get->singkatan }})</option> 
+                                                <label>Asal Regional</label>
+                                                <select class="form-control select2" name="regional_id">
+                                                    @foreach ($regionals as $reg)
+                                                    @if (old('regional_id', $get->regional_id)==$reg->uuid)
+                                                       <option value="{{ $reg->uuid }}" selected>{{ $reg->nama }}</option>        
+                                                       @else 
+                                                       <option value="{{ $reg->uuid }}">{{ $reg->nama }}</option>
                                                     @endif
-                                                    @endforeach                                                    
-                                                </select>
-                                                @error('created_by')
-                                                <div class="invalid-feedback">
-                                                    {{ $message }}
-                                                </div>
-                                                @enderror
+                                                    @endforeach
+                                                </select>        
                                             </div>
                                             <div class="mb-3">
-                                                <label for="picture">Flyer Acara</label>
+                                                <label for="picture">Logo Komunitas</label>
+                                                <input type="hidden" name="oldPicture" value="{{ $get->picture }}">
+                                                @if ($get->picture)
                                                 <div class="mb-3">
+                                                    <img src="{{ asset('storage/'.$get->picture) }}" class="img-fluid mb-3" id="category-img-tag" width="200px" /> 
+                                                    </div>   
+                                                @else
+                                                 <div class="mb-3">
                                                 <img src="https://www.riobeauty.co.uk/images/product_image_not_found.gif" class="img-fluid mb-3" id="category-img-tag" width="200px" /> 
-                                                </div>
+                                                </div>   
+                                                @endif                                                
                                                 <div class="input-group">
                                                     <input type="file" class="form-control @error('picture') is-invalid @enderror" name="picture" id="cat_image" accept="image/*" onchange="previewImage">
                                                     @error('picture')
@@ -107,15 +104,16 @@
                                                 @enderror
                                             </div>
                                             </div>
+
                                             <div class="mb-3">
-                                            <label>Deskripsi Acara</label>
-										    <textarea class="form-control" name="content" id='content' rows="8"></textarea>
+                                            <label>Deskripsi Komunitas</label>
+										    <textarea class="form-control" name="content" id='content' rows="8">{{ old('content', $get->content) }}</textarea>
                                             </div>
                                             <div>
                                                 <button type="submit" class="btn btn-md btn-primary waves-effect waves-light me-1">
                                                     Submit
                                                 </button>
-                                                <a href="{{ route('event.index') }}" class="btn btn-md btn-secondary">Back</a>
+                                                <a href="{{ route('PPkomunitas.index') }}" class="btn btn-md btn-secondary">Back</a>
                                             </div>
                                         </form>                                        
                                     </div>
@@ -128,6 +126,4 @@
                 <!-- End Page-content -->    
                                       
 
-                
-
-            @include('admin.footer')
+            @include('footer')

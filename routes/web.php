@@ -2,19 +2,24 @@
 
 use App\Http\Controllers\AirportController;
 use App\Http\Controllers\AnggotaKomunitasController;
+use App\Http\Controllers\AttendantController;
+use App\Http\Controllers\AtttendantController;
+use App\Http\Controllers\AtttendatController;
 use App\Http\Controllers\BiodataController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\EventController;
 use App\Http\Controllers\IndoRegionController;
 use App\Http\Controllers\KomunitasController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PengpusEventController;
+use App\Http\Controllers\PengpusGiftController;
+use App\Http\Controllers\PoinController;
 use App\Http\Controllers\RegionalController;
 use App\Http\Controllers\RegisterController;
 use App\Models\AnggotaKomunitas;
+use App\Models\Attendant;
 use App\Models\Biodata;
-use AzisHapidin\IndoRegion\IndoRegion;
-use GuzzleHttp\Middleware;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,6 +34,8 @@ use GuzzleHttp\Middleware;
 
 // routing captcha
 Route::get('/reload-captcha', [RegisterController::class, 'reloadCaptcha']);
+// routing ajax kota-kabupaten
+Route::get('/getkabupaten', [IndoRegionController::class, 'getKabupaten']);
 
 // routing login + logout 
 Route::get('/login', [LoginController::class, 'index'])->name('login');
@@ -40,27 +47,26 @@ Route::post('/logout', [LoginController::class, 'logout']);
 Route::get('/register', [RegisterController::class, 'index']);
 Route::post('/register', [RegisterController::class, 'store']);
 
+// USER ROUTING
 Route::get('/home', [DashboardController::class, 'index'])->middleware('auth')->name('home');
 Route::resource('/biodata', BiodataController::class)->middleware('auth');
 Route::resource('/anggotakomunitas', AnggotaKomunitasController::class)->middleware('auth');
+Route::get('/event/{slug}', [EventController::class, 'show'])->name('event.show');
+Route::resource('/event', EventController::class, ['names' => 'event'])->middleware('auth');
+Route::resource('/attendant', AttendantController::class, ['names' => 'attendant'])->middleware('auth');
 
-Route::get('/getkabupaten', [IndoRegionController::class, 'getKabupaten']);
+Route::get('/poinku', [PoinController::class, 'index'])->name('poin.index');
 
-// ROUTING MASTER REGIONAL
-Route::resource('pengpus/regional',RegionalController::class);
-// Route::get('/regional', [RegionalController::class, 'index'])->Middleware('auth');
-
-Route::resource('pengpus/komunitas',KomunitasController::class);
-
-Route::resource('pengpus/event',PengpusEventController::class);
+// ROUTING MASTER PP
+Route::resource('pengpus/regional',RegionalController::class, ['names' => 'PPregionals']);
+Route::resource('pengpus/komunitas',KomunitasController::class, ['names' => 'PPkomunitas']);
+Route::resource('pengpus/event',PengpusEventController::class, ['names' => 'PPevents']);
+Route::resource('pengpus/gift',PengpusGiftController::class, ['names' => 'PPgifts']);
 
 Route::get('/agenda', function () {
     return view('admin/agenda');
 });
 
-Route::get('/poinku', function () {
-    return view('admin/poin');
-});
 
 Route::get('/adart', function () {
     return view('admin/adart');

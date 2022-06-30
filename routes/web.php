@@ -15,6 +15,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PengpusEventController;
 use App\Http\Controllers\PengpusGiftController;
 use App\Http\Controllers\PoinController;
+use App\Http\Controllers\RedeemController;
 use App\Http\Controllers\RegionalController;
 use App\Http\Controllers\RegisterController;
 use App\Models\AnggotaKomunitas;
@@ -56,6 +57,7 @@ Route::resource('/event', EventController::class, ['names' => 'event'])->middlew
 Route::resource('/attendant', AttendantController::class, ['names' => 'attendant'])->middleware('auth');
 
 Route::get('/poinku', [PoinController::class, 'index'])->name('poin.index');
+Route::get('/poinku/redeem', [RedeemController::class, 'index'])->name('redeem.index');
 
 // ROUTING MASTER PP
 Route::resource('pengpus/regional',RegionalController::class, ['names' => 'PPregionals']);

@@ -34,7 +34,7 @@ class PoinController extends Controller
         ->orderby('updated_at', 'DESC')       
         ->get();
         // dd($events);
-        return view ('poin', compact('biodata', 'poin', 'events'));
+        return view ('poin.poin', compact('biodata', 'poin', 'events'));
          
     }
 }

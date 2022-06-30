@@ -18,4 +18,9 @@ class Gift extends Model
     return 'uuid';
 }
 
+public function redeem()
+    {
+        return $this->hasOne(Redeem::class, 'uuid', 'gift_id');
+    }
+
 }

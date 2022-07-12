@@ -11,11 +11,11 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                                    <h4 class="mb-sm-0">Data Komunitas</h4>
+                                    <h4 class="mb-sm-0">Data Anggota</h4>
 
                                     <div class="page-title-right">
                                         <ol class="breadcrumb m-0">                                            
-                                            <li class="breadcrumb-item active">Data Komunitas</li>
+                                            <li class="breadcrumb-item active">Data Anggota</li>
                                         </ol>
                                     </div>
 
@@ -41,30 +41,34 @@
                                             {{ session('error') }}
                                         </div>
                                         @endif
-                                                <h4 class="card-title">Data Club dan Komunitas</h4>
-                                        <p class="card-title-desc">Berikut adalah daftar <em>club</em> dan komunitas di Federasi Supra Indonesia.
+                                                <h4 class="card-title">Data Anggota</h4>
+                                        <p class="card-title-desc">Berikut adalah Anggota di Federasi Supra Indonesia.
                                         </p>
                                         <a href="{{ route('PPkomunitas.create') }}" class="btn btn-sm btn-primary mb-3 float-right"><i class="ri-add-box-fill"></i> Tambah Baru</a>
                                         <table id="regionalsTable" class="table table-striped table-bordered dt-responsive ">
                                             <thead>
                                             <tr>                                                                                             
-                                                <th>Nama Komunitas</th>
-                                                <th>Regional</th>                                                                                     
+                                                <th>Nama Anggota</th>
+                                                <th>No FSI</th>
+                                                <th>Asal Komunitas</th>                                                                                     
+                                                <th>Email</th>
                                                 <th>Aksi</th>
                                             </tr>
                                             </thead>
                                             <tbody>                                                
-                                                @foreach ($komunitas as $get)  
+                                                @foreach ($anggotas as $get)  
                                             <tr>                                                                                               
-                                                <td>{{ $get->nama }} </</td> 
-                                                <td>{{ $get->regional->nama }}</td>                                                                                               
+                                                <td>{{ $get->fullname }} </</td> 
+                                                <td>{{ $get->fsi_id }}</td>
+                                                <td>{{ $get->AnggotaKomunitas->Komunitas->nama }}</td>
+                                                <td>{{ $get->user->email }}</td>
                                                 <td>
                                                 <div class="btn-group" role="group" aria-label="Basic example">
-                                                    <a href="{{ route('PPkomunitas.show', $get->uuid) }}" class="btn btn-sm btn-info"><i class="ri-eye-line"> Lihat</i></a>
-                                                    <a href="{{ route('PPkomunitas.edit', $get->uuid) }}" class="btn btn-sm btn-primary"><i class="ri-pencil-line
+                                                    <a href="{{ route('PPanggotas.show', $get->uuid) }}" class="btn btn-sm btn-info"><i class="ri-eye-line"> Lihat</i></a>
+                                                    <a href="{{ route('PPanggotas.edit', $get->uuid) }}" class="btn btn-sm btn-primary"><i class="ri-pencil-line
                                                         "></i> Ubah</a>
                                                     <form onsubmit="return confirm('Apakah Anda Yakin ?');"
-                                            action="{{ route('PPkomunitas.destroy', $get->uuid) }}" method="POST" class="d-inline">                                            
+                                            action="{{ route('PPanggotas.destroy', $get->uuid) }}" method="POST" class="d-inline">                                            
                                             @method('DELETE')
                                             @csrf                                            
                                             <button type="submit" class="btn btn-sm btn-danger"><i class="ri-delete-bin-2-line"></i> Hapus</button>

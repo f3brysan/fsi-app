@@ -48,7 +48,7 @@ class AnggotaKomunitasController extends Controller
         
         // dd($biodata);
 
-        return view('admin.biodata.join', compact('komunitas', 'biodata'));
+        return view('biodata.join', compact('komunitas', 'biodata'));
     }
 
     /**

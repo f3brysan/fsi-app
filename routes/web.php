@@ -12,6 +12,7 @@ use App\Http\Controllers\IndoRegionController;
 use App\Http\Controllers\KomunitasController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\PengpusAnggotaController;
 use App\Http\Controllers\PengpusEventController;
 use App\Http\Controllers\PengpusGiftController;
 use App\Http\Controllers\PoinController;
@@ -64,6 +65,7 @@ Route::resource('pengpus/regional',RegionalController::class, ['names' => 'PPreg
 Route::resource('pengpus/komunitas',KomunitasController::class, ['names' => 'PPkomunitas']);
 Route::resource('pengpus/event',PengpusEventController::class, ['names' => 'PPevents']);
 Route::resource('pengpus/gift',PengpusGiftController::class, ['names' => 'PPgifts']);
+Route::resource('pengpus/anggota',PengpusAnggotaController::class, ['names' => 'PPanggotas']);
 
 Route::get('/agenda', function () {
     return view('admin/agenda');

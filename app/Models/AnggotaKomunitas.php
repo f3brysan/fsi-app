@@ -21,8 +21,13 @@ class AnggotaKomunitas extends Model
 
     public function Biodata()
 {
-    return $this->hasOne(AnggotaKomunitas::class, 'biodata_uuid', 'uuid');        
+    return $this->hasOne(Biodata::class, 'uuid', 'biodata_uuid');        
 }
+
+    public function Komunitas()
+    {
+        return $this->hasOne(Komunitas::class,'uuid','komunitas_uuid');
+    }
 
 public function getKomunitasUser($parr)
     {

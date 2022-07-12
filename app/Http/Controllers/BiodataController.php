@@ -43,7 +43,7 @@ class BiodataController extends Controller
     {
         $prov = Province::all();
         $motor = Motor::all();
-        return view('admin.biodata.create', compact('prov','motor'));
+        return view('biodata.create', compact('prov','motor'));
     }
 
     /**
@@ -111,7 +111,7 @@ class BiodataController extends Controller
         $komunitas = $this->AnggotaKomunitas->getKomunitasUser($parr)->first();        
 
         // dd($komunitas);
-         return view ('admin.biodata.show',compact('parr', 'biodata', 'komunitas'));
+         return view ('biodata.show',compact('parr', 'biodata', 'komunitas'));
         
     }
 

@@ -54,6 +54,13 @@
 <script src="/../assets/libs/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
 <script src="/../assets/libs/datatables.net-select/js/dataTables.select.min.js"></script>
 
+{{-- DATA TABLE CDN --}}
+{{-- <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap4.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.3.0/js/responsive.bootstrap4.min.js"></script> --}}
+
 <script>
     $(document).ready(function(){
         $('.owl-carousel').owlCarousel({    
@@ -80,10 +87,8 @@
 } );
 </script>
 
-<script>
-    $(document).ready( function () {
-    $('#regionalsTable').DataTable();
-} );
+<script type>   
+    $('#regionalsTable').DataTable();    
 </script>
 
 <script>

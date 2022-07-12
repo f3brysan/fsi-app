@@ -78,7 +78,7 @@
                                                               </tr>
                                                               <tr>
                                                                 <td>Email</td>
-                                                                <td>{{ $biodata->email }}</td>
+                                                                <td>{{ $biodata->user->email }}</td>
                                                               </tr>
                                                                 <td>Phone Number</td>
                                                                 <td>{{ $biodata->no_hp }}</td>

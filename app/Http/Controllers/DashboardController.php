@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Poin;
+use App\Models\Event;
 use App\Models\Biodata;
 use Illuminate\Http\Request;
 use App\Models\AnggotaKomunitas;
-use App\Models\Event;
 use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
@@ -20,15 +21,16 @@ class DashboardController extends Controller
     {
         $session = Auth::user()->uuid;
         $biodata = Biodata::where('user_uuid', $session)->first();        
-        $events = Event::with('komunitas')->where('its_end','>',date('Y-m-d'))->get();
+        $events = Event::with('komunitas')->where('its_end','>=',date('Y-m-d'))->get();
         $parr = $biodata->uuid;
+        $poin = Poin::getUserDebitPoin($parr);
         $komunitas = $this->AnggotaKomunitas->getKomunitasUser($parr)->first(); 
         
-        // dd($avaliableEvent);
+        // dd($poin);
         
 
         if ($biodata){
-            return view('dashboard', compact('biodata', 'komunitas', 'events'));
+            return view('dashboard', compact('biodata', 'komunitas', 'events', 'poin'));
         }
         else {
             return redirect()

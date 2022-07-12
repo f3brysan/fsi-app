@@ -9,6 +9,7 @@ use App\Models\Komunitas;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\AnggotaKomunitas;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
@@ -30,7 +31,7 @@ class KomunitasController extends Controller
     {
         $biodata = $this->session();
         $komunitas = Komunitas::with('regional')->orderBy('nama')->get();
-        return view('admin.komunitas.index', compact('komunitas', 'biodata'));
+        return view('master.komunitas.index', compact('komunitas', 'biodata'));
     }
 
     /**
@@ -42,7 +43,7 @@ class KomunitasController extends Controller
     {
         $biodata = $this->session();
         $regionals = Regional::orderBy('nama')->get();
-        return view('admin.komunitas.create', compact('regionals', 'biodata'));
+        return view('master.komunitas.create', compact('regionals', 'biodata'));
     }
 
     /**
@@ -106,9 +107,17 @@ class KomunitasController extends Controller
      * @param  \App\Models\Komunitas  $komunitas
      * @return \Illuminate\Http\Response
      */
-    public function show(Komunitas $komunitas)
+    public function show(Komunitas $komunita)
     {
-        //
+        $biodata = $this->session();
+        $komunitas = Komunitas::where('uuid',$komunita->uuid)
+                ->with('Regional')
+                ->first();        
+        $anggota = AnggotaKomunitas::where('komunitas_uuid',$komunita->uuid)
+                ->with('Biodata','Biodata.User','Biodata.Motor')
+                ->get();
+                // dd($anggota);
+        return view('master.komunitas.show',compact('biodata','komunitas','anggota'));
     }
 
     /**
@@ -123,7 +132,7 @@ class KomunitasController extends Controller
         $get = Komunitas::findOrFail($komunita->id);
         // $get = dd();
         $regionals = Regional::orderBy('nama')->get();
-        return view('admin.komunitas.edit', compact('get', 'regionals', 'biodata'));
+        return view('master.komunitas.edit', compact('get', 'regionals', 'biodata'));
     }
 
     /**
@@ -168,7 +177,7 @@ class KomunitasController extends Controller
         
         if ($komunitas) {
             return redirect()
-            ->route('komunitas.index')
+            ->route('PPkomunitas.index')
             ->with(['success' => 'Data Komunitas '.$request->nama.' berhasil diubah.']);
         }
         else {

@@ -23,7 +23,7 @@ class Biodata extends Model
 
     public function User()
     {
-        return $this->hasOne(User::class, 'user_uuid', 'uuid');
+        return $this->belongsTo(User::class, 'user_uuid', 'uuid');
     }
 
     public function Motor()
@@ -33,7 +33,7 @@ class Biodata extends Model
 
     public function AnggotaKomunitas()
     {
-        return $this->hasOne(AnggotaKomunitas::class, 'uuid', 'biodata_uuid' );
+        return $this->hasOne(AnggotaKomunitas::class, 'biodata_uuid', 'uuid' );
     }
 
     public function Attendant()

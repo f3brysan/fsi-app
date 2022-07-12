@@ -5,6 +5,7 @@
         height: 300px;
         display: flex;
         justify-content: center;
+        overflow:hidden;
 
     }
 
@@ -12,6 +13,7 @@
         width: 90%;
         margin: auto;
         display: block;
+        overflow:hidden;
     }
 </style>
 
@@ -47,8 +49,8 @@
                             <div class="d-flex">
                                 <div class="flex-grow-1">
                                     <p class="text-truncate font-size-14 mb-2">Perolehan Poin</p>
-                                    <h4 class="mb-2">220 Poin</h4>
-                                    <a href="">
+                                    <h4 class="mb-2">{{ $poin }} Poin</h4>
+                                    <a href="/poinku">
                                         <p class="text-muted mb-0">Lihat histori poin <i
                                                 class="text-success fas fafas fa-arrow-right"></i></p>
                                     </a>
@@ -90,7 +92,7 @@
                                         <span class="badge badge-soft-info">Member</span>
                                         @endif</p>
                                         <a href="{{ route('biodata.show',$biodata->uuid) }}">
-                                            <p class="text-muted mb-0">Cek Profil <span
+                                            <p class="text-muted mb-0">QRCode Saya <span
                                                     class="fas fafas fa-arrow-right"></span></p>
                                         </a>
                                 </div>

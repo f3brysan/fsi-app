@@ -29,6 +29,17 @@ class AnggotaKomunitasController extends Controller
         return $biodata;
     }
 
+    public function generateUniqueCode()
+    {
+        do {
+            $number = 0000;
+            $code = random_int(10000, 99999);
+            $hash_code = 'FSI'.$number.$code;
+        } while (AnggotaKomunitas::where("fsi_id", "=", $hash_code)->first());
+  
+        return $hash_code;
+    }
+
     public function index()
     {
         return  'wkwkw';
@@ -69,7 +80,8 @@ class AnggotaKomunitasController extends Controller
         $join_komunitas = AnggotaKomunitas::create([
             'uuid' => $uuid,
             'komunitas_uuid' => $request->join_komunitas,
-            'biodata_uuid' => $uuid_biodata                             
+            'biodata_uuid' => $uuid_biodata,
+            'fsi_id' => $this->generateUniqueCode()                             
         ]);
         if ($join_komunitas) {
             return redirect()

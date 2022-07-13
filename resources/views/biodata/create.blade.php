@@ -1,4 +1,4 @@
-@include('admin.biodata.navbar')
+@include('biodata.navbar')
 <!-- ============================================================== -->
             <!-- Start right Content here -->
             <!-- ============================================================== -->
@@ -224,4 +224,4 @@
                 <!-- End Page-content -->    
                                       
 
-            @include('admin.biodata.footer')
+            @include('biodata.footer')

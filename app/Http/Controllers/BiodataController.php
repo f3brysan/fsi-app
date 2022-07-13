@@ -110,7 +110,7 @@ class BiodataController extends Controller
         $biodata = $this->Biodata->getBiodataUser($parr)->first();
         $komunitas = $this->AnggotaKomunitas->getKomunitasUser($parr)->first();        
 
-        // dd($komunitas);
+        // dd($biodata);
          return view ('biodata.show',compact('parr', 'biodata', 'komunitas'));
         
     }

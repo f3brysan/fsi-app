@@ -1,4 +1,4 @@
-@include('admin.biodata.navbar')
+@include('biodata.navbar')
 <!-- ============================================================== -->
             <!-- Start right Content here -->
             <!-- ============================================================== -->
@@ -78,7 +78,7 @@
                                                               </tr>
                                                               <tr>
                                                                 <td>Email</td>
-                                                                <td>{{ $biodata->user->email }}</td>
+                                                                <td>{{ $biodata->email }}</td>
                                                               </tr>
                                                                 <td>Phone Number</td>
                                                                 <td>{{ $biodata->no_hp }}</td>
@@ -175,4 +175,4 @@
                 <!-- End Page-content -->    
                                       
 
-            @include('admin.biodata.footer')
+            @include('biodata.footer')

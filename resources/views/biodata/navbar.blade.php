@@ -258,7 +258,7 @@
                             </li>
 
                             <li>
-                                <a href="{{ route('komunitas.index') }}" >
+                                <a href="{{ route('PPkomunitas.index') }}" >
                                     <i class="ri-database-line"></i>
                                     <span>Data Komunitas</span>
                                 </a>                                
@@ -272,7 +272,7 @@
                             </li>
 
                             <li>
-                                <a href="{{ route('event.index') }}" >
+                                <a href="{{ route('PPevents.index') }}" >
                                     <i class="ri-map-pin-4-fill"></i>
                                     <span>Data Event</span>
                                 </a>                                

@@ -85,13 +85,18 @@
                             <div class="col-md-8">
                                 <div class="card-body">
                                     <h5 class="card-title">{{ $biodata->fullname }} ({{ $biodata->nickname }})</h5>
-                                    <p class="card-text">{{ $komunitas->nama }} ({{ $komunitas->singkatan }}) 
-                                      @if($komunitas->is_approve == 0):
+                                    <p class="card-text">@if ($komunitas)
+                                        {{ $komunitas->nama }} ({{ $komunitas->singkatan }})
+                                        @if($komunitas->is_approve == 0):
                                         <span class="badge badge-soft-danger">Belum Terverfikasi</span>
                                     @else
                                         <span class="badge badge-soft-info">Member</span>
-                                        @endif</p>
-                                        <a href="{{ route('biodata.show',$biodata->uuid) }}">
+                                        @endif
+                                        @else
+                                        Belum Tergabung
+                                    @endif  
+                                      </p>
+                                        <a class="btn btn-link" data-bs-toggle="modal" data-bs-target=".bs-example-modal-center"">
                                             <p class="text-muted mb-0">QRCode Saya <span
                                                     class="fas fafas fa-arrow-right"></span></p>
                                         </a>
@@ -138,6 +143,23 @@
                     </div>
                 </div>
             </div>
+
+            <div class="modal fade bs-example-modal-center" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">@if ($komunitas)
+                              No FSI ID Saya :  {{ $komunitas->fsi_id }}
+                            @endif</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="events"> {!! QrCode::size(300)->generate($komunitas->fsi_id) !!}</div>
+                           
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+            </div><!-- /.modal -->
 
 
         </div>

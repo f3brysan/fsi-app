@@ -12,7 +12,7 @@ class Poin extends Model
 
     public function getUserDebitPoin($parr)
     {
-        return DB::table('attendants')->sum('attendants.point');
+        return DB::table('attendants')->where('is_attendat',TRUE)->sum('attendants.point');
         
     }
 }

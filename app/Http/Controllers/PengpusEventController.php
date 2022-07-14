@@ -95,7 +95,10 @@ class PengpusEventController extends Controller
      */
     public function show(Event $event)
     {
-        //
+        $biodata = $this->session();
+        $event = Event::findOrFail($event->id);
+        // dd($getData);
+        return view('master.event.show', compact('biodata', 'event'));
     }
 
     /**

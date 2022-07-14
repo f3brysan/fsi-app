@@ -9,7 +9,7 @@
         <meta content="Themesdesign" name="author" />
         
         <!-- App favicon -->
-        <link rel="shortcut icon" href="?../assets/images/favicon.ico">
+        <link rel="shortcut icon" href="../assets/images/favicon2.ico">
 
         <!-- Bootstrap Css -->
         <link href="/../assets/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
@@ -168,8 +168,14 @@
                         <div class="dropdown d-inline-block user-dropdown">
                             <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown"
                                 data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                @if ($biodata->picture)
                                 <img class="rounded-circle header-profile-user" src="{{ asset('storage/'.$biodata->picture) }}"
-                                    alt="Header Avatar">
+                                alt="Header Avatar">
+                                @else
+                                <img class="rounded-circle header-profile-user" src="assets/images/users/avatar-1.jpg"
+                                alt="Header Avatar">
+                                @endif
+                                
                                 <span class="d-none d-xl-inline-block ms-1">Hai, @if ($biodata)
                                     {{ $biodata->nickname }}                                
                                 @endif</span>
@@ -250,10 +256,9 @@
                                     <li><a href="email-inbox.html">KAS Pusat</a></li>
                                     <li><a href="email-read.html">KAS Regional</a></li>
                                 </ul>              
-                            </li>
+                            </li>                            
 
-                            <li class="menu-title">Fitur Lain</li>
-
+                            @can('MasterData')
                             <li class="menu-title">Master Data</li>
                             <li>
                                 <a href="{{ route('PPregionals.index') }}" >
@@ -289,6 +294,7 @@
                                     <span>Data Hadiah</span>
                                 </a>                                
                             </li>
+                            @endcan
                         </ul>
                     </div>
                     <!-- Sidebar -->

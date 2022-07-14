@@ -20,23 +20,18 @@ class DashboardController extends Controller
     public function index()
     {
         $session = Auth::user()->uuid;
-        $biodata = Biodata::where('user_uuid', $session)->first();        
+        $biodata = Biodata::where('user_uuid', $session)->first();
+        if (!$biodata) {
+            return redirect()
+            ->route('biodata.create')
+            ->with(['error' => 'Harap isi biodata Anda terlebih dahulu']);
+        } else {
         $events = Event::with('komunitas')->where('its_end','>=',date('Y-m-d'))->get();
         $parr = $biodata->uuid;
         $poin = Poin::getUserDebitPoin($parr);
         $komunitas = $this->AnggotaKomunitas->getKomunitasUser($parr)->first(); 
-        
-        // dd($poin);
-        
-
-        if ($biodata){
-            return view('dashboard', compact('biodata', 'komunitas', 'events', 'poin'));
+        return view('dashboard', compact('biodata', 'komunitas', 'events', 'poin'));
         }
-        else {
-            return redirect()
-            ->route('biodata.create')
-            ->with(['error' => 'Harap isi biodata Anda terlebih dahulu']);
-        }   
        
     }
 }

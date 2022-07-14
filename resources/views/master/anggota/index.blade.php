@@ -26,7 +26,7 @@
 
                         <div class="row">
                             <div class="col-12">
-                                <h4>Data Komunitas</h4>
+                                <h4>Data Anggota Komunitas</h4>
                                 <div class="card">
                                     <div class="card-body">
                                         <!-- Notifikasi menggunakan flash session data -->
@@ -59,8 +59,18 @@
                                                 @foreach ($anggotas as $get)  
                                             <tr>                                                                                               
                                                 <td>{{ $get->fullname }} </</td> 
-                                                <td>{{ $get->fsi_id }}</td>
-                                                <td>{{ $get->AnggotaKomunitas->Komunitas->nama }}</td>
+                                                <td>@if ($get->AnggotaKomunitas)
+                                                    {{ $get->AnggotaKomunitas->fsi_id }}
+                                                @else
+                                                    NA
+                                                @endif
+                                                    </td>
+                                                <td>@if ($get->AnggotaKomunitas)
+                                                    {{ $get->AnggotaKomunitas->Komunitas->nama }}
+                                                @else
+                                                    Belum Tergabung
+                                                @endif
+                                                    </td>
                                                 <td>{{ $get->user->email }}</td>
                                                 <td>
                                                 <div class="btn-group" role="group" aria-label="Basic example">

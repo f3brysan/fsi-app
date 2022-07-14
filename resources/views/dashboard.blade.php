@@ -71,7 +71,7 @@
                     <div class="card">
                         <div class="row no-gutters align-items-center">
                             <div class="col-md-2">
-                                <div class="px-2 mt-2">
+                                <div class="px-2">
                                     @if($biodata->picture)
                                         <img class="card-img avatar-lg"
                                             src="{{ asset('storage/'. $biodata->picture) }}"
@@ -148,9 +148,7 @@
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title">@if ($komunitas)
-                              No FSI ID Saya :  {{ $komunitas->fsi_id }}
-                            @endif</h5>
+                            <h5 class="modal-title">QrCode Saya</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
@@ -158,6 +156,9 @@
                             <div class="events"> {!! QrCode::size(300)->generate($biodata->uuid) !!}</div>
                             @endif
                         </div>
+                        @if ($komunitas)
+                             <p style="text-align:center">No FSI ID Saya : <strong>{{ $komunitas->fsi_id }}</strong></p>
+                            @endif
                     </div><!-- /.modal-content -->
                 </div><!-- /.modal-dialog -->
             </div><!-- /.modal -->

@@ -14,7 +14,7 @@
                                     <h4 class="mb-sm-0">Edit Data Regional</h4>
                                     <div class="page-title-right">
                                         <ol class="breadcrumb m-0">
-                                            <li class="breadcrumb-item"><a href="{{ route('regional.index') }}"> Data Regional</a></li>                                            
+                                            <li class="breadcrumb-item"><a href="{{ route('PPregionals.index') }}"> Data Regional</a></li>                                            
                                             <li class="breadcrumb-item active">Edit Data Regional</li>
                                         </ol>
                                     </div>
@@ -42,7 +42,7 @@
                                     </div>
                                     @endif
                                         <h4 class="card-title">Tambah Data Regional Baru</h4>                                        
-                                        <form action="{{ route('regional.update', $get->uuid) }}" method="POST">
+                                        <form action="{{ route('PPregionals.update', $get->uuid) }}" method="POST">
                                             @csrf
                                             @method('PUT')
 
@@ -64,7 +64,7 @@
                                                 <button type="submit" class="btn btn-md btn-primary waves-effect waves-light me-1">
                                                     Submit
                                                 </button>
-                                                <a href="{{ route('regional.index') }}" class="btn btn-md btn-secondary">Back</a>
+                                                <a href="{{ route('PPregionals.index') }}" class="btn btn-md btn-secondary">Back</a>
                                             </div>
                                         </form>
                                         

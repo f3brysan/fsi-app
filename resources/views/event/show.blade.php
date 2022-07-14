@@ -1,4 +1,20 @@
 @include('navbar')
+<style>
+    .events {
+        height: 300px;
+        display: flex;
+        justify-content: center;
+        overflow:hidden;
+
+    }
+
+    .events img {
+        width: 90%;
+        margin: auto;
+        display: block;
+        overflow:hidden;
+    }
+</style>
 <!-- ============================================================== -->
             <!-- Start right Content here -->
             <!-- ============================================================== -->
@@ -39,7 +55,10 @@
                                         <h6 class="card-subtitle font-14 text-muted">{{ date('d M Y', strtotime($event->its_start)).' - '.date('d M Y', strtotime($event->its_end)) }}</h6>   
                                         <p class="card-text">{!! $event->content !!}</p>
                                         @if($attendant)
-                                        <a href="#" class="btn btn-danger d-grid disabled" ></i> Wes Registras Su !</a> 
+                                        <a class="btn btn-success d-grid" data-bs-toggle="modal" data-bs-target=".bs-example-modal-center"">
+                                            <p class="text-muted mb-0"> Tampilkan QRCode Registrasi <span
+                                                    class="fas fafas fa-arrow-right"></span></p>
+                                        </a>
                                         @elseif ($event->its_start <= now() && $event->its_end >= now())
                                         <form action="{{ route('attendant.store') }}" method="POST">
                                             @csrf
@@ -63,5 +82,21 @@
                 </div>
                 <!-- End Page-content -->    
                                       
+{{-- MODAL QRCODE  --}}
+                <div class="modal fade bs-example-modal-center" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Qr Code {{ $event->nama }}</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                @if ($biodata)
+                                <div class="events"> {!! QrCode::size(300)->generate($biodata->uuid) !!}</div>
+                                @endif
+                            </div>                            
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal-dialog -->
+                </div><!-- /.modal -->
 
             @include('footer')

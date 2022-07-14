@@ -44,7 +44,7 @@
                                                 <h4 class="card-title">Data Regional</h4>
                                         <p class="card-title-desc">Berikut adalah daftar regional di Federasi Supra Indonesia.
                                         </p>
-                                        <a href="{{ route('regional.create') }}" class="btn btn-sm btn-primary mb-3 float-right"><i class="ri-add-box-fill"></i> Tambah Baru</a>
+                                        <a href="{{ route('PPregionals.create') }}" class="btn btn-sm btn-primary mb-3 float-right"><i class="ri-add-box-fill"></i> Tambah Baru</a>
                                         <table id="regionalsTable" class="table table-responsive">
                                             <thead>
                                             <tr>                                               
@@ -62,10 +62,10 @@
                                                 <td>{{ $no++ }}</td>                                                  
                                                 <td>{{ $regional['nama'] }}</td>                                                                                                
                                                 <td>
-                                                    <a href="{{ route('regional.edit', $regional->uuid) }}" class="btn btn-sm btn-primary"><i class="ri-pencil-line
+                                                    <a href="{{ route('PPregionals.edit', $regional->uuid) }}" class="btn btn-sm btn-primary"><i class="ri-pencil-line
                                                         "></i> Ubah</a>
                                                     <form onsubmit="return confirm('Apakah Anda Yakin ?');"
-                                            action="{{ route('regional.destroy', $regional->uuid) }}" method="POST" class="d-inline">                                            
+                                            action="{{ route('PPregionals.destroy', $regional->uuid) }}" method="POST" class="d-inline">                                            
                                             @method('DELETE')
                                             @csrf                                            
                                             <button type="submit" class="btn btn-sm btn-danger"><i class="ri-delete-bin-2-line"></i> Hapus</button>

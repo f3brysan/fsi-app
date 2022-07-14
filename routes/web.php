@@ -1,27 +1,28 @@
 <?php
 
-use App\Http\Controllers\AirportController;
-use App\Http\Controllers\AnggotaKomunitasController;
-use App\Http\Controllers\AttendantController;
-use App\Http\Controllers\AtttendantController;
-use App\Http\Controllers\AtttendatController;
-use App\Http\Controllers\BiodataController;
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\EventController;
-use App\Http\Controllers\IndoRegionController;
-use App\Http\Controllers\KomunitasController;
+use App\Models\Biodata;
+use App\Models\Attendant;
+use App\Models\AnggotaKomunitas;
+use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\LoginController;
-use App\Http\Controllers\PengpusAnggotaController;
-use App\Http\Controllers\PengpusEventController;
-use App\Http\Controllers\PengpusGiftController;
 use App\Http\Controllers\PoinController;
+use App\Http\Controllers\EventController;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RedeemController;
+use App\Http\Controllers\AirportController;
+use App\Http\Controllers\BiodataController;
 use App\Http\Controllers\RegionalController;
 use App\Http\Controllers\RegisterController;
-use App\Models\AnggotaKomunitas;
-use App\Models\Attendant;
-use App\Models\Biodata;
+use App\Http\Controllers\AttendantController;
+use App\Http\Controllers\AtttendatController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\KomunitasController;
+use App\Http\Controllers\AtttendantController;
+use App\Http\Controllers\IndoRegionController;
+use App\Http\Controllers\PengpusGiftController;
+use App\Http\Controllers\PengpusEventController;
+use App\Http\Controllers\PengpusAnggotaController;
+use App\Http\Controllers\AnggotaKomunitasController;
 
 /*
 |--------------------------------------------------------------------------
@@ -66,7 +67,7 @@ Route::resource('pengpus/komunitas',KomunitasController::class, ['names' => 'PPk
 Route::resource('pengpus/event',PengpusEventController::class, ['names' => 'PPevents']);
 Route::resource('pengpus/gift',PengpusGiftController::class, ['names' => 'PPgifts']);
 Route::resource('pengpus/anggota',PengpusAnggotaController::class, ['names' => 'PPanggotas']);
-Route::post('/attendant', [AttendantController::class, 'acc'])->name('attendant.acc');
+Route::post('/attendant/acc', [AttendantController::class, 'acc'])->name('attendant.acc');
 
 Route::get('/agenda', function () {
     return view('admin/agenda');
@@ -75,5 +76,10 @@ Route::get('/agenda', function () {
 
 Route::get('/adart', function () {
     return view('admin/adart');
+});
+
+Route::get('permission', function(){
+    $role = Role::find(1);
+    $role->givePermissionTo('MasterData');
 });
 

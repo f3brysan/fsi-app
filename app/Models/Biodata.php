@@ -7,14 +7,17 @@ use App\Models\Motor;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Spatie\Permission\Traits\HasRoles;
 
 class Biodata extends Model
 {
-    use HasFactory;
+    use HasFactory, HasRoles;
 
     protected $guarded = [
         'id'
     ];
+
+    protected $guard_name = 'web';
 
     public function getRouteKeyName()
 {

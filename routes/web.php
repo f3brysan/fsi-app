@@ -66,6 +66,7 @@ Route::resource('pengpus/komunitas',KomunitasController::class, ['names' => 'PPk
 Route::resource('pengpus/event',PengpusEventController::class, ['names' => 'PPevents']);
 Route::resource('pengpus/gift',PengpusGiftController::class, ['names' => 'PPgifts']);
 Route::resource('pengpus/anggota',PengpusAnggotaController::class, ['names' => 'PPanggotas']);
+Route::post('/attendant', [AttendantController::class, 'acc'])->name('attendant.acc');
 
 Route::get('/agenda', function () {
     return view('admin/agenda');

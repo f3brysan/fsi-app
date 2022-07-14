@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Event;
 use Ramsey\Uuid\Uuid;
 use App\Models\Biodata;
 use App\Models\Attendant;
@@ -79,7 +80,7 @@ class AttendantController extends Controller
      * @param  \App\Models\Attendant  $attendant
      * @return \Illuminate\Http\Response
      */
-    public function edit(Attendant $attendant)
+    public function edit(Attendant $attendant, Request $request)
     {
         //
     }
@@ -105,5 +106,27 @@ class AttendantController extends Controller
     public function destroy(Attendant $attendant)
     {
         //
+    }
+
+    public function acc(Request $request)
+    {               
+        $attendant = Attendant::where('event_uuid',$request->event_uuid)
+                            ->where('biodata_uuid',$request->result)
+                            ->first();
+        // dd($event);        
+
+        if ($attendant) {
+            $attendant->update([                
+                'is_attendat' => TRUE
+            ]); 
+            return redirect()
+            ->route('PPevents.show',$request->event_uuid)
+            ->with(['success' => 'Peserta Berhasil diregistrasi ulang.']);
+        }
+        else {
+            return redirect()
+            ->route('PPevents.show',$request->event_uuid)
+            ->with(['error' => 'Data Peserta Tidak Ada']);
+        }
     }
 }

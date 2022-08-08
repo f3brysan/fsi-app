@@ -28,11 +28,16 @@ class Komunitas extends Model
     public function getRouteKeyName()
 {
     return 'uuid';
-}
+}   
 
     public function regional()
-{
-    return $this->belongsTo(Regional::class,'regional_id','uuid'); 
-}
+    {
+    return $this->belongsTo(Regional::class,'regional_id','uuid')->orderBy('nama', 'desc'); 
+    }
+
+    public function AnggotaKomunitas()
+    {
+        return $this->hasMany(AnggotaKomunitas::class,'komunitas_uuid','uuid');
+    }
 
 }

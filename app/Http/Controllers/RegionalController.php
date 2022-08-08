@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use Ramsey\Uuid\Uuid;
+use App\Models\Biodata;
 use App\Models\Regional;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Controller;
 
 class RegionalController extends Controller
 {
@@ -14,10 +17,20 @@ class RegionalController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    //  QUERY SESSION LOGIN
+    public function session()
+    {
+        $session = Auth::user()->uuid;        
+        $biodata = Biodata::where('user_uuid', $session)->first();
+        return $biodata;
+    }
+
     public function index()
-    {        
+    {           
         $regionals = Regional::orderBy('nama')->get();
-        return view('admin.regional.index', compact('regionals'));
+        $biodata = $this->session();        
+        return view('master.regional.index', compact('regionals', 'biodata'));
     }
 
     /**
@@ -27,7 +40,8 @@ class RegionalController extends Controller
      */
     public function create()
     {
-        return view('admin.regional.create');
+        $biodata = $this->session();  
+        return view('master.regional.create', compact('biodata'));
     }
 
     /**
@@ -52,8 +66,8 @@ class RegionalController extends Controller
         
         if ($regional) {
             return redirect()
-            ->route('regional.index')
-            ->with(['success' => 'Data Regional berhasil ditambahkan.']);
+            ->route('PPregionals.index')
+            ->with(['success' => 'Data Regional '.$request->nama.' berhasil ditambahkan.']);
         }
         else {
             return redirect()
@@ -82,9 +96,9 @@ class RegionalController extends Controller
      */
     public function edit(Regional $regional)
     {
-        $get = Regional::where($regional->id);
-        return $get;
-        // return view('admin.regional.edit', compact('get'));
+        $get = Regional::findOrFail($regional->id);
+        $biodata = $this->session();
+        return view('master.regional.edit', compact('get', 'biodata'));
     }
 
     /**
@@ -109,8 +123,8 @@ class RegionalController extends Controller
         
         if ($regional) {
             return redirect()
-            ->route('regional.index')
-            ->with(['success' => 'Data Regional berhasil diubah.']);
+            ->route('PPregionals.index')
+            ->with(['success' => 'Data Regional '.$regional->nama.' berhasil diubah.']);
         }
         else {
             return redirect()
@@ -130,9 +144,9 @@ class RegionalController extends Controller
     {
             Regional::destroy($regional->id);
             return redirect()
-                ->route('regional.index')
+                ->route('PPregionals.index')
                 ->with([
-                    'success' => 'Data Regional berhasil dihapus.'
+                    'success' => 'Data Regional '.$regional->nama.' berhasil dihapus.'
                 ]);        
         
     }

@@ -76,7 +76,7 @@ class PengpusEventController extends Controller
 
         if ($event) {
             return redirect()
-            ->route('PPevent.index')
+            ->route('PPevents.index')
             ->with(['success' => 'Event baru berhasil ditambahkan.']);
         }
         else {
@@ -159,7 +159,7 @@ class PengpusEventController extends Controller
 
         if ($event) {
             return redirect()
-            ->route('PPevent.index')
+            ->route('PPevents.index')
             ->with(['success' => 'Event '.$event->nama.' berhasil Diedit.']);
         }
         else {
@@ -181,7 +181,7 @@ class PengpusEventController extends Controller
         Storage::delete($event->picture);
         Event::destroy($event->id);
             return redirect()
-                ->route('PPevent.index')
+                ->route('PPevents.index')
                 ->with([
                     'success' => 'Event '.$event->nama.' berhasil dihapus.'
                 ]); 

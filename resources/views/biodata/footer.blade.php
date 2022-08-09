@@ -54,50 +54,9 @@
 <script src="/../assets/libs/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
 <script src="/../assets/libs/datatables.net-select/js/dataTables.select.min.js"></script>
 
-<script>
-    $(document).ready(function(){
-  $(".owl-carousel").owlCarousel();
-});
-</script>
 
-<script>
-    $(document).ready( function () {
-    $('#adartTable').DataTable();
-} );
-</script>
 
-<script>
-    $(document).ready( function () {
-    $('#regionalsTable').DataTable();
-} );
-</script>
 
-{{-- JAVASCRIPT UNTUK PROVINSI KABUPATEN/KOTA35 --}}
-<script>
-$('#provinsi').change(function(){
-    var province_id = $(this).val();    
-    if(province_id){
-        $.ajax({
-           type:"GET",
-           url:"/getkabupaten?province_id="+province_id,
-           dataType: 'JSON',
-           success:function(res){               
-            if(res){
-                $("#kabupaten").empty();               
-                $("#kabupaten").append('<option>--- Pilih Kabupaten ---</option>');               
-                $.each(res,function(name,id){
-                    $("#kabupaten").append('<option value="'+id+'">'+name+'</option>');
-                });
-            }else{
-               $("#kabupaten").empty();              
-            }
-           }
-        });
-    }else{
-        $("#kabupaten").empty();
-    }      
-   });
-</script>
 
 
 

@@ -1,23 +1,23 @@
 
 
-{{-- DATA TABLE CDN --}}
-{{-- <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap4.min.js"></script>
-<script src="https://cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js"></script>
-<script src="https://cdn.datatables.net/responsive/2.3.0/js/responsive.bootstrap4.min.js"></script> --}}
+<!-- JAVASCRIPT -->
+<script src="/../assets/libs/jquery/jquery.min.js"></script>
+<script src="/../assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/../assets/libs/metismenu/metisMenu.min.js"></script>
+<script src="/../assets/libs/simplebar/simplebar.min.js"></script>
+<script src="/../assets/libs/node-waves/waves.min.js"></script>
+<script src="/../assets/libs/select2/js/select2.min.js"></script>
+<script src="/../assets/libs/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+<script src="/../assets/js/pages/form-advanced.init.js"></script>
+<script src="/../assets/libs/dropzone/min/dropzone.min.js"></script>
+
+{{-- Owl Caraousel --}}
+<script src="/../assets/libs/owl.carousel/owl.carousel.min.js"></script>
 
 
 
-<script>
-    $(document).ready( function () {
-    $('#adartTable').DataTable();
-} );
-</script>
 
-<script>   
-    $('#regionalsTable').DataTable();    
-</script>
+
 
 <script>
     ClassicEditor

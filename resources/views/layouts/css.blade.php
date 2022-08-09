@@ -9,6 +9,8 @@
 {{-- Owl Carousel --}}
 <link href="/../assets/libs/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet" type="text/css" />
 <link href="/../assets/libs/owl.carousel/assets/owl.theme.default.min.css" rel="stylesheet" type="text/css" />   
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/css/iziToast.css"
+integrity="sha256-pODNVtK3uOhL8FUNWWvFQK0QoQoV3YA9wGGng6mbZ0E=" crossorigin="anonymous" />
  
 <!-- DataTables -->
 {{-- <link href="/../assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
@@ -19,5 +21,4 @@
 <script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/ckeditor.js"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css"></script>
-<script src="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap4.min.css"></script>
 <script src="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap4.min.css"></script>

@@ -1,5 +1,8 @@
-@include('navbar')
+@extends('layouts.main')
 
+@section('title', 'Dashboard')
+
+@push('css-custom')
 <style>
     .events {
         height: 300px;
@@ -16,6 +19,9 @@
         overflow:hidden;
     }
 </style>
+@endpush
+
+@section('container')
 
 <div class="main-content">
 
@@ -169,4 +175,27 @@
 </div>
 <!-- End Page-content -->
 
-@include('footer')
+@endsection
+
+@push('js-custom')
+
+<script>
+    $(document).ready(function(){
+        $('.owl-carousel').owlCarousel({    
+    margin:10,
+    nav:true,
+    responsive:{
+        0:{
+            items:1
+        },
+        600:{
+            items:3
+        },
+        1000:{
+            items:5
+        }
+    }
+});
+});
+</script>
+@endpush
